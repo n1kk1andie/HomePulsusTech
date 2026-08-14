@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pulsus Tech — Technology Risk Intelligence</title>
+<meta name="description" content="Pulsus Tech is a live technology risk intelligence layer — governing availability, network, lifecycle, outsourcing, dependencies and resilience in one platform." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23141215'/%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23E4012B' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='1.6' fill='%23E4012B'/%3E%3C/svg%3E" />
+<style>
+  :root{
+    --bg:#F6F3F1; --ink:#14100F; --dark:#141215; --dark2:#1E1B1E;
+    --red:#E4012B; --red-deep:#B4001F; --muted:#6E625E; --line:#E7E0DC; --card:#FFFFFF;
+    --green:#16A34A; --amber:#E58E26; --grey:#9AA0A6;
+    --sans:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:inherit;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px;}
+  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .red{color:var(--red);}
+  h1,h2,h3{margin:0;letter-spacing:-.01em;}
+  section{padding:56px 0;}
+
+  /* ── Top bar ─────────────────────────────────────────── */
+  .topbar{background:var(--dark);color:#fff;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;gap:12px;}
+  .logo{display:inline-flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em;font-size:20px;}
+  .logo .mark{width:30px;height:30px;flex:0 0 30px;}
+  .logo small{display:block;font-size:9.5px;font-weight:700;letter-spacing:.16em;color:#B8B0AC;margin-top:2px;}
+  .topbar .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9A928E;}
+
+  /* ── Hero ────────────────────────────────────────────── */
+  .hero{background:linear-gradient(180deg,var(--dark) 0%,var(--dark) 46%,var(--bg) 46%,var(--bg) 100%);}
+  .hero .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:34px;align-items:center;padding:40px 0 56px;}
+  .hero h1{font-size:44px;line-height:1.05;font-weight:800;color:#fff;}
+  .hero h1 .red{display:block;}
+  .hero .lead{color:#CFC7C3;font-size:16px;max-width:440px;margin:18px 0 26px;}
+  .feats{display:flex;flex-wrap:wrap;gap:22px;}
+  .feat{display:flex;flex-direction:column;align-items:center;gap:8px;width:84px;text-align:center;}
+  .feat .ic{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff;}
+  .feat span{font-size:11.5px;color:#CFC7C3;font-weight:600;line-height:1.25;}
+
+  /* ── Dashboard mock ──────────────────────────────────── */
+  .dash{background:#0F0D10;border:1px solid #2A262A;border-radius:16px;padding:14px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);color:#EDEAEC;}
+  .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .dash-head .t{font-size:13px;font-weight:700;}
+  .dash-head .d{font-size:10.5px;color:#9A928E;background:#1C191D;border:1px solid #2E2A2F;border-radius:20px;padding:4px 9px;}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}
+  .tile{background:#171519;border:1px solid #262229;border-radius:10px;padding:9px;}
+  .tile .k{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:#8E8890;}
+  .tile .v{font-size:19px;font-weight:800;margin:2px 0 1px;}
+  .tile .s{font-size:9px;color:#8E8890;}
+  .tile .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle;}
+  .panels{display:grid;grid-template-columns:1.35fr 1fr;gap:8px;}
+  .panel{background:#171519;border:1px solid #262229;border-radius:10px;padding:10px;}
+  .panel .h{font-size:10px;font-weight:700;color:#CFC7C3;margin-bottom:8px;}
+  .legend{display:flex;flex-direction:column;gap:5px;}
+  .legend div{display:flex;align-items:center;gap:6px;font-size:9.5px;color:#B8B0AC;}
+  .legend .sw{width:8px;height:8px;border-radius:2px;flex:0 0 8px;}
+  .legend b{margin-left:auto;color:#EDEAEC;font-weight:700;}
+  .donut{width:78px;height:78px;border-radius:50%;
+    background:conic-gradient(var(--green) 0 32%,var(--grey) 32% 57%,var(--red) 57% 75%,var(--amber) 75% 90%,#4A4650 90% 100%);
+    position:relative;flex:0 0 78px;}
+  .donut::after{content:"";position:absolute;inset:14px;border-radius:50%;background:#171519;}
+  .rows2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+  .li{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9.5px;padding:4px 0;border-top:1px solid #232025;}
+  .li:first-of-type{border-top:none;}
+  .li .name{color:#CFC7C3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .badge{font-size:8px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:10px;text-transform:uppercase;}
+  .b-high{background:rgba(228,1,43,.16);color:#FF6B7E;}
+  .b-med{background:rgba(229,142,38,.16);color:#F0B366;}
+  .b-ok{background:rgba(22,163,74,.16);color:#5FD08A;}
+  .incident{display:grid;grid-template-columns:auto 1fr auto;gap:8px;font-size:9px;color:#B8B0AC;padding:4px 0;border-top:1px solid #232025;align-items:center;}
+  .incident:first-of-type{border-top:none;}
+  .incident .id{color:#8E8890;font-variant-numeric:tabular-nums;}
+
+  /* ── Six views ───────────────────────────────────────── */
+  .center{text-align:center;}
+  .h2{font-size:27px;font-weight:800;letter-spacing:-.01em;}
+  .rule{width:56px;height:3px;background:var(--red);border-radius:3px;margin:12px auto 0;}
+  .views{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
+  .view{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;text-align:center;
+    transition:transform .15s ease,box-shadow .15s ease;position:relative;}
+  .view:hover{transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(20,16,15,.4);}
+  .view .ic{width:56px;height:56px;border-radius:14px;background:#FBEAEC;color:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+  .view h3{font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--red);line-height:1.3;min-height:34px;display:flex;align-items:center;justify-content:center;}
+  .view p{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.5;}
+  .tagnew{position:absolute;top:14px;right:14px;background:var(--red);color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;padding:3px 8px;border-radius:20px;}
+
+  /* ── Decisions + benefits ────────────────────────────── */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;}
+  .qs{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:16px;}
+  .q{display:flex;gap:10px;align-items:center;}
+  .q .ic{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--red);flex:0 0 34px;}
+  .q span{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .qfirst{display:flex;gap:12px;align-items:center;margin-top:18px;background:#FBEAEC;border-radius:12px;padding:12px 14px;}
+  .qfirst .ic{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 30px;}
+  .qfirst span{font-size:14px;font-weight:800;}
+  .benefits{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .benefits li{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink);}
+  .benefits .ck{width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 22px;margin-top:1px;}
+
+  /* ── Regulatory band ─────────────────────────────────── */
+  .reg{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;display:grid;grid-template-columns:1.6fr 1fr;gap:26px;align-items:center;}
+  .reg .ic{width:64px;height:64px;color:var(--red);flex:0 0 64px;}
+  .reg .head{display:flex;gap:18px;align-items:center;}
+  .reg h3{font-size:20px;font-weight:800;}
+  .reg p{font-size:14px;color:var(--muted);margin:10px 0 0;line-height:1.55;}
+  .reg .aside{border-left:1px solid var(--line);padding-left:24px;}
+  .reg .aside .big{font-size:16px;font-weight:800;line-height:1.35;}
+  .reg .aside .sub{font-size:15px;font-weight:800;color:var(--red);line-height:1.35;margin-top:6px;}
+
+  /* ── Footer ──────────────────────────────────────────── */
+  footer{background:var(--dark);color:#CFC7C3;margin-top:22px;}
+  .foot{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:24px;padding:40px 0;align-items:start;}
+  .foot .brand{display:flex;flex-direction:column;gap:8px;}
+  .foot .brand .logo{color:#fff;}
+  .fcol h4{color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:0 0 8px;display:flex;gap:8px;align-items:center;}
+  .fcol h4 .ic{color:var(--red);}
+  .fcol p{font-size:12px;margin:0;color:#9A928E;line-height:1.5;}
+  .strip{border-top:1px solid #2A262A;}
+  .strip .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;padding:14px 22px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8E8890;}
+  .strip .dot{color:var(--red);}
+
+  @media (max-width:900px){
+    .hero{background:var(--dark);}
+    .hero .grid{grid-template-columns:1fr;padding-bottom:34px;}
+    section{padding:44px 0;}
+    .hero h1{font-size:34px;}
+    .views{grid-template-columns:1fr 1fr;}
+    .split{grid-template-columns:1fr;gap:26px;}
+    .reg{grid-template-columns:1fr;}
+    .reg .aside{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:18px;}
+    .foot{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .tiles{grid-template-columns:1fr 1fr;}
+    .panels{grid-template-columns:1fr;}
+    .rows2{grid-template-columns:1fr;}
+    .views{grid-template-columns:1fr;}
+    .qs{grid-template-columns:1fr;}
+    .foot{grid-template-columns:1fr;}
+    .hero h1{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="logo">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1E1B1E"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#E4012B" stroke-width="2"/><circle cx="12" cy="12" r="1.8" fill="#E4012B"/></svg>
+      <span>PULSUS <span class="red">TECH</span><small>TECHNOLOGY RISK INTELLIGENCE</small></span>
+    </span>
+    <span class="tag">Live Intelligence&nbsp;·&nbsp;Actionable Signals</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h1>Technology is now critical infrastructure.<span class="red">Know where the risk is.</span></h1>
+        <p class="lead">Pulsus Tech gives you the live intelligence to govern, manage and strengthen the technology that runs your business.</p>
+        <div class="feats">
+          <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-7 3 14 3-7h4"/></svg></span><span>Live Intelligence</span></div>
+          <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-6 3 12 2-8 2 4h6"/></svg></span><span>Actionable Signals</span></div>
+          <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><span>Executive Clarity</span></div>
+          <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.5C7.4 20.5 4 17 4 12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Stronger Resilience</span></div>
+        </div>
+      </div>
+
+      <!-- Dashboard mock -->
+      <div class="dash" role="img" aria-label="Pulsus Tech dashboard preview">
+        <div class="dash-head"><span class="t">Technology Command Center</span><span class="d">Jan – May 2026</span></div>
+        <div class="tiles">
+          <div class="tile"><div class="k">Technology Stability</div><div class="v" style="color:var(--green)">94%</div><div class="s"><span class="dot" style="background:var(--green)"></span>Stable</div></div>
+          <div class="tile"><div class="k">Operational Risk</div><div class="v" style="color:var(--amber)">Medium</div><div class="s"><span class="dot" style="background:var(--amber)"></span>Manageable</div></div>
+          <div class="tile"><div class="k">SLA Performance</div><div class="v" style="color:var(--green)">96.2%</div><div class="s"><span class="dot" style="background:var(--green)"></span>On Track</div></div>
+          <div class="tile"><div class="k">Open Incidents</div><div class="v" style="color:var(--red)">12</div><div class="s"><span class="dot" style="background:var(--red)"></span>Investigating</div></div>
+        </div>
+        <div class="panels">
+          <div class="panel">
+            <div class="h">Technology Stability Trend</div>
+            <svg viewBox="0 0 260 92" width="100%" height="92" preserveAspectRatio="none" aria-hidden="true">
+              <g stroke="#2A262A" stroke-width="1">
+                <line x1="0" y1="18" x2="260" y2="18"/><line x1="0" y1="42" x2="260" y2="42"/><line x1="0" y1="66" x2="260" y2="66"/>
+              </g>
+              <polyline fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="8,52 60,40 112,46 164,28 216,32 252,22"/>
+              <polyline fill="none" stroke="#8E8890" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="8,64 60,58 112,60 164,50 216,54 252,48"/>
+              <g fill="var(--red)"><circle cx="8" cy="52" r="2.6"/><circle cx="60" cy="40" r="2.6"/><circle cx="112" cy="46" r="2.6"/><circle cx="164" cy="28" r="2.6"/><circle cx="216" cy="32" r="2.6"/><circle cx="252" cy="22" r="2.6"/></g>
+            </svg>
+            <div style="display:flex;gap:14px;margin-top:6px;font-size:8.5px;color:#8E8890">
+              <span><span class="dot" style="background:var(--red)"></span>Application Availability</span>
+              <span><span class="dot" style="background:#8E8890"></span>Network Availability</span>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="h">Risk by Category</div>
+            <div style="display:flex;gap:12px;align-items:center;">
+              <div class="donut"></div>
+              <div class="legend" style="flex:1">
+                <div><span class="sw" style="background:var(--green)"></span>Availability<b>32%</b></div>
+                <div><span class="sw" style="background:var(--grey)"></span>Performance<b>25%</b></div>
+                <div><span class="sw" style="background:var(--red)"></span>Security<b>18%</b></div>
+                <div><span class="sw" style="background:var(--amber)"></span>Lifecycle<b>15%</b></div>
+                <div><span class="sw" style="background:#4A4650"></span>Other<b>10%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rows2">
+          <div class="panel">
+            <div class="h">Top Risks &amp; Issues</div>
+            <div class="li"><span class="name"><span class="dot" style="background:var(--green)"></span>High EOL Exposure</span><span class="badge b-high">High</span></div>
+            <div class="li"><span class="name"><span class="dot" style="background:var(--green)"></span>SLA Breaches (3)</span><span class="badge b-med">Medium</span></div>
+            <div class="li"><span class="name"><span class="dot" style="background:var(--green)"></span>Third-Party Concentration</span><span class="badge b-med">Medium</span></div>
+            <div class="li"><span class="name"><span class="dot" style="background:var(--green)"></span>Critical Dependency at Risk</span><span class="badge b-high">High</span></div>
+          </div>
+          <div class="panel">
+            <div class="h">Recent Incidents</div>
+            <div class="incident"><span class="id">INC-25019</span><span class="name">Core Banking</span><span class="badge b-high">Major</span></div>
+            <div class="incident"><span class="id">INC-25017</span><span class="name">Digital Channels</span><span class="badge b-high">Major</span></div>
+            <div class="incident"><span class="id">INC-25012</span><span class="name">Network Connectivity</span><span class="badge b-med">High</span></div>
+            <div class="incident"><span class="id">INC-25007</span><span class="name">ATM Switching</span><span class="badge b-ok">Medium</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Six connected views -->
+<section>
+  <div class="wrap">
+    <div class="center">
+      <h2 class="h2">One Platform. <span class="red">Six Connected Views.</span></h2>
+      <div class="rule"></div>
+    </div>
+    <div class="views">
+      <div class="view">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 12l3-3 2 2 4-4"/></svg></div>
+        <h3>Application &amp; Service Intelligence</h3>
+        <p>Track availability, SLA performance, criticality and service trends across the application portfolio.</p>
+      </div>
+      <div class="view">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 8l4.5 8M17.5 8l-4.5 8"/></svg></div>
+        <h3>Network &amp; Incident Intelligence</h3>
+        <p>Monitor network performance, service disruptions, SLA breaches and incident command history.</p>
+      </div>
+      <div class="view">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><circle cx="15.5" cy="15" r="3"/><path d="M15.5 13.6V15l1 .8"/></svg></div>
+        <h3>Technology Lifecycle</h3>
+        <p>See EOL and EOS exposure before ageing technology becomes an operational, security or resilience risk.</p>
+      </div>
+      <div class="view">
+        <span class="tagnew">NEW</span>
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="18" cy="9" r="2.4"/><path d="M15.5 20a5 5 0 0 1 6.5-4.8"/></svg></div>
+        <h3>Outsourcing &amp; Third-Party Risk</h3>
+        <p>Maintain the outsourcing register and assess materiality, criticality, approvals, renewals, contractual gaps and provider concentration.</p>
+      </div>
+      <div class="view">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg></div>
+        <h3>Dependency Intelligence</h3>
+        <p>Understand how applications, infrastructure, services, vendors and fourth parties connect — exposing concentrations and single points of failure.</p>
+      </div>
+      <div class="view">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.5C7.4 20.5 4 17 4 12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Resilience &amp; Data</h3>
+        <p>Track continuity, recovery, data protection and supporting evidence against critical technology and third-party arrangements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- From data to decisions -->
+<section style="padding-top:12px;">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">From technology data</div>
+        <h2 class="h2" style="margin-top:4px;">to <span class="red">management decisions.</span></h2>
+        <p style="color:var(--muted);font-size:14px;margin:12px 0 0;">Pulsus Tech helps answer:</p>
+        <div class="qs">
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg></span><span>What is critical?</span></div>
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><span>What is underperforming?</span></div>
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M12 13v3l2 1"/></svg></span><span>What is approaching end-of-support?</span></div>
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 8l4.5 8M17.5 8l-4.5 8" stroke-linecap="round"/></svg></span><span>Where are our concentrations and dependencies?</span></div>
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M4 20a5 5 0 0 1 10 0"/><circle cx="18" cy="9" r="2"/></svg></span><span>Which third-party arrangements require attention?</span></div>
+          <div class="q"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.5C7.4 20.5 4 17 4 12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Where are the resilience and contractual gaps?</span></div>
+        </div>
+        <div class="qfirst"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c.7.6 1 1.2 1 2h6c0-.8.3-1.4 1-2a7 7 0 0 0-4-12z"/></svg></span><span>And where should management act first?</span></div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="color:var(--ink);font-size:18px;letter-spacing:0;text-transform:none;font-weight:800;">Key Benefits</div>
+        <ul class="benefits">
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>One consolidated view across technology, services, vendors and contracts</li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Better risk visibility for stronger, faster decisions</li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Proactive identification of gaps, exposures and risks</li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Evidence for management, audit and regulatory reporting</li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Supports regulatory expectations for outsourcing and third-party risk management</li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Built for scalability, integration and continuous insights</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Regulatory readiness -->
+<section style="padding-top:12px;">
+  <div class="wrap">
+    <div class="reg">
+      <div>
+        <div class="head">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M3 10l9-6 9 6M6 21V13M10 21V13M14 21V13M18 21V13"/></svg>
+          <h3>Built for Regulatory <span class="red">Readiness</span></h3>
+        </div>
+        <p>Pulsus Tech brings technology, service, outsourcing and resilience information together to support evolving central bank and regulatory expectations, including those of the Bank of Jamaica&rsquo;s Outsourcing Arrangements and Third-Party Risk Management framework.</p>
+      </div>
+      <div class="aside">
+        <div class="big">Not another compliance register.</div>
+        <div class="sub">A live technology risk intelligence layer for the institution.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brand">
+        <span class="logo"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1E1B1E"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#E4012B" stroke-width="2"/><circle cx="12" cy="12" r="1.8" fill="#E4012B"/></svg><span>PULSUS <span class="red">TECH</span></span></span>
+        <p style="font-size:11px;color:#8E8890;margin:0;letter-spacing:.06em;">TECHNOLOGY RISK INTELLIGENCE</p>
+      </div>
+      <div class="fcol"><h4><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Know Your Technology</h4><p>Live visibility across your technology environment.</p></div>
+      <div class="fcol"><h4><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 8l4.5 8M17.5 8l-4.5 8" stroke-linecap="round"/></svg></span>Understand Dependencies</h4><p>Map what matters. Reveal what&rsquo;s connected.</p></div>
+      <div class="fcol"><h4><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.5C7.4 20.5 4 17 4 12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>See Your Risk</h4><p>Identify exposures. Prioritise what needs action.</p></div>
+      <div class="fcol"><h4><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>Drive Better Outcomes</h4><p>Stronger resilience. Better decisions. Better results.</p></div>
+    </div>
+  </div>
+  <div class="strip">
+    <div class="wrap">
+      <span>Live Intelligence</span><span class="dot">&bull;</span><span>Actionable Signals</span><span class="dot">&bull;</span><span>Executive Clarity</span><span class="dot">&bull;</span><span>Stronger Resilience</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
