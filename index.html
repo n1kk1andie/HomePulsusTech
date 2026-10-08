@@ -34,9 +34,9 @@
   .topbar .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
 
   /* ── Hero ────────────────────────────────────────────── */
-  .hero{background:linear-gradient(180deg,var(--dark) 0%,var(--dark) 46%,var(--bg) 46%,var(--bg) 100%);}
+  .hero{background:var(--dark);}
   .hero .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:34px;align-items:center;padding:40px 0 56px;}
-  .hero h1{font-size:44px;line-height:1.05;font-weight:800;color:#fff;}
+  .hero h1{font-size:40px;line-height:1.08;font-weight:800;color:#fff;}
   .hero h1 .red{display:block;}
   .hero .lead{color:#CFC7C3;font-size:16px;max-width:440px;margin:18px 0 26px;}
   .feats{display:flex;flex-wrap:wrap;gap:22px;}
@@ -155,6 +155,31 @@
     .foot{grid-template-columns:1fr;}
     .hero h1{font-size:30px;}
   }
+
+  /* ── Proposition, problem, outcomes, roles (added) ───── */
+  .tbr{display:flex;align-items:center;gap:16px;}
+  .cbtn.sm{padding:9px 16px;font-size:12px;white-space:nowrap;}
+  .hero .kick{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#CFC7C3;margin:0 0 14px;}
+  .hcta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:0 0 26px;}
+  .hlink{color:#CFC7C3;font-size:13.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+  .intro{max-width:620px;margin:16px auto 0;color:var(--muted);font-size:15px;}
+  .costs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;}
+  .costs .c{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;padding:20px;}
+  .costs b{display:block;font-size:15px;font-weight:800;}
+  .costs p{font-size:13px;color:var(--muted);margin:8px 0 0;line-height:1.5;}
+  .view .out{color:var(--ink);font-weight:700;font-size:13px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+  .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;}
+  .roles .r{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .roles b{display:block;font-size:15px;font-weight:800;color:var(--red);}
+  .roles p{font-size:13px;color:var(--muted);margin:8px 0 0;line-height:1.5;}
+  .inds{text-align:center;margin:26px 0 0;font-size:14px;color:var(--muted);line-height:2.2;}
+  .inds b{color:var(--ink);}
+  .inds span{display:inline-block;margin:0 4px;padding:3px 11px;border-radius:99px;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:12.5px;font-weight:600;line-height:1.6;}
+  .contact .cmail.big{font-size:22px;color:#fff;font-weight:800;}
+  .contact p a{color:var(--red);text-decoration:none;font-weight:700;}
+  @media (max-width:900px){ .costs,.roles{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .costs,.roles{grid-template-columns:1fr;} .topbar .tag{display:none;}
+    .feats{gap:10px;justify-content:space-between;} .feat{width:72px;} .feat span{font-size:10.5px;} }
 </style>
 </head>
 <body>
@@ -166,7 +191,8 @@
       <span class="mark" aria-hidden="true"></span>
       <span>Pulsus <span class="red">Tech</span><small>Technology Risk Intelligence</small></span>
     </span>
-    <span class="tag">Live Intelligence&nbsp;·&nbsp;Actionable Signals</span>
+    <span class="tbr"><span class="tag">Live Intelligence&nbsp;·&nbsp;Actionable Signals</span>
+      <a class="cbtn sm" href="https://about.pulsus.tech/demo/?app=Tech#ask">Book a demo</a></span>
   </div>
 </div>
 
@@ -175,8 +201,13 @@
   <div class="wrap">
     <div class="grid">
       <div>
-        <h1>Technology is now critical infrastructure.<span class="red">Know where the risk is.</span></h1>
-        <p class="lead">Pulsus Tech gives you the live intelligence to govern, manage and strengthen the technology that runs your business.</p>
+        <p class="kick">Pulsus Tech&nbsp;·&nbsp;Technology risk &amp; operational intelligence</p>
+        <h1>Know what&rsquo;s running.<br>Understand what&rsquo;s at risk.<span class="red">Act before it&rsquo;s a problem.</span></h1>
+        <p class="lead">One live view of the applications, networks, vendors and ageing systems your institution runs on, and of the risk building up inside them.</p>
+        <div class="hcta">
+          <a class="cbtn" href="https://about.pulsus.tech/demo/?app=Tech#ask">See where your tech risks are hiding <span aria-hidden="true">&rarr;</span></a>
+          <a class="hlink" href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20request%20a%20conversation">or talk to us first</a>
+        </div>
         <div class="feats">
           <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-7 3 14 3-7h4"/></svg></span><span>Live Intelligence</span></div>
           <div class="feat"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-6 3 12 2-8 2 4h6"/></svg></span><span>Actionable Signals</span></div>
@@ -245,6 +276,22 @@
   </div>
 </div>
 
+<!-- The costly problem -->
+<section class="cost">
+  <div class="wrap">
+    <div class="center">
+      <h2 class="h2">Fragmented oversight is <span class="red">expensive.</span></h2>
+      <div class="rule"></div>
+      <p class="intro">When technology risk lives in spreadsheets, vendor emails and separate monitoring tools, nobody sees the whole picture until something breaks.</p>
+    </div>
+    <div class="costs">
+      <div class="c"><b>Hidden exposure</b><p>Systems past end of life or end of support keep running unnoticed, carrying security and resilience risk that nobody has signed off.</p></div>
+      <div class="c"><b>Outages</b><p>Incidents surface through customers and branches first, and the same failures recur because no one sees the pattern behind them.</p></div>
+      <div class="c"><b>Wasted spend</b><p>Licences, contracts and renewals for technology no one tracks keep rolling over, and duplicate tools go unchallenged.</p></div>
+      <div class="c"><b>Unmanaged third-party risk</b><p>Critical services rest on providers, and their providers, with no view of concentration, materiality or contract gaps.</p></div>
+    </div>
+  </div>
+</section>
 <!-- Six connected views -->
 <section>
   <div class="wrap">
@@ -257,31 +304,37 @@
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 12l3-3 2 2 4-4"/></svg></div>
         <h3>Application &amp; Service Intelligence</h3>
         <p>Track availability, SLA performance, criticality and service trends across the application portfolio.</p>
+        <p class="out">Service problems caught before customers feel them.</p>
       </div>
       <div class="view">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 8l4.5 8M17.5 8l-4.5 8"/></svg></div>
         <h3>Network &amp; Incident Intelligence</h3>
         <p>Monitor network performance, service disruptions, SLA breaches and incident command history.</p>
+        <p class="out">Faster recovery, and fewer repeat incidents.</p>
       </div>
       <div class="view">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><circle cx="15.5" cy="15" r="3"/><path d="M15.5 13.6V15l1 .8"/></svg></div>
         <h3>Technology Lifecycle</h3>
         <p>See EOL and EOS exposure before ageing technology becomes an operational, security or resilience risk.</p>
+        <p class="out">Ageing technology replaced on your timetable, not after a failure.</p>
       </div>
       <div class="view">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="18" cy="9" r="2.4"/><path d="M15.5 20a5 5 0 0 1 6.5-4.8"/></svg></div>
         <h3>Outsourcing &amp; Third-Party Risk</h3>
         <p>Maintain the outsourcing register and assess materiality, criticality, approvals, renewals, contractual gaps and provider concentration.</p>
+        <p class="out">No critical provider left unassessed or unapproved.</p>
       </div>
       <div class="view">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg></div>
         <h3>Dependency Intelligence</h3>
         <p>Understand how applications, infrastructure, services, vendors and fourth parties connect — exposing concentrations and single points of failure.</p>
+        <p class="out">Single points of failure found before they fail.</p>
       </div>
       <div class="view">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.5C7.4 20.5 4 17 4 12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Resilience &amp; Data</h3>
         <p>Track continuity, recovery, data protection and supporting evidence against critical technology and third-party arrangements.</p>
+        <p class="out">Recovery you can evidence to auditors and regulators.</p>
       </div>
     </div>
   </div>
@@ -321,6 +374,23 @@
   </div>
 </section>
 
+<!-- Who it is for -->
+<section style="padding-top:12px;">
+  <div class="wrap">
+    <div class="center">
+      <h2 class="h2">Built for the people who <span class="red">answer for technology.</span></h2>
+      <div class="rule"></div>
+    </div>
+    <div class="roles">
+      <div class="r"><b>CIO &amp; CTO</b><p>What is running, what is ageing, and what depends on what.</p></div>
+      <div class="r"><b>COO</b><p>Service levels, incidents and the operational impact of technology failure.</p></div>
+      <div class="r"><b>CRO &amp; compliance</b><p>Technology and third-party risk, with evidence ready for audit and regulators.</p></div>
+      <div class="r"><b>CEO &amp; board</b><p>One honest picture of technology exposure, and what is being done about it.</p></div>
+    </div>
+    <p class="inds"><b>Built in banking.</b> Suited to any institution where technology is critical:
+      <span>Banks</span><span>Credit unions</span><span>Insurers</span><span>Telecoms</span><span>Utilities</span><span>Public sector</span></p>
+  </div>
+</section>
 <!-- Regulatory readiness -->
 <section style="padding-top:12px;">
   <div class="wrap">
@@ -330,7 +400,7 @@
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M3 10l9-6 9 6M6 21V13M10 21V13M14 21V13M18 21V13"/></svg>
           <h3>Built for Regulatory <span class="red">Readiness</span></h3>
         </div>
-        <p>Pulsus Tech brings technology, service, outsourcing and resilience information together to support evolving central bank and regulatory expectations.</p>
+        <p>Pulsus Tech brings technology, service, outsourcing and resilience information together to support evolving supervisory and regulatory expectations, from central banks to sector regulators.</p>
       </div>
       <div class="aside">
         <div class="big">Not another compliance register.</div>
@@ -345,14 +415,11 @@
   <div class="wrap">
     <div class="contact">
       <div>
-        <div class="eyebrow">Contact</div>
-        <div class="cmail">Email: <a href="mailto:info@pulsus.tech">info@pulsus.tech</a></div>
-        <p>We&rsquo;d love to hear from you.</p>
+        <div class="eyebrow">Book a demo</div>
+        <div class="cmail big">See where your tech risks are hiding.</div>
+        <p>A working walkthrough, not a slide deck. Or email <a href="mailto:info@pulsus.tech">info@pulsus.tech</a> to start with a conversation.</p>
       </div>
-      <a class="cbtn" href="mailto:info@pulsus.tech">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-        Contact Us
-      </a>
+      <a class="cbtn" href="https://about.pulsus.tech/demo/?app=Tech#ask">Book a demo <span aria-hidden="true">&rarr;</span></a>
     </div>
     <div class="foot">
       <div class="brand">
