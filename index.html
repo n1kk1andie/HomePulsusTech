@@ -657,8 +657,8 @@ footer a{color:#D8D1CE}
     <div class="price rv">
       <div class="plan">
         <p class="k">Pulsus Tech</p>
-        <p class="amt"><b id="p-base">$500</b><span>per month</span></p>
-        <p class="sub">Includes <b id="p-inc">5</b> users. Each further user <b id="p-extra">$50</b> a month. People who only view are free.</p>
+        <p class="amt"><b id="p-base">$500</b><span>per entity, per month</span></p>
+        <p class="sub">An entity is one company. Each includes <b id="p-inc">5</b> users; each further user is <b id="p-extra">$50</b> a month. People who only view are free. A group with several companies pays for each one.</p>
         <ul class="incl">
           <li>All six views: applications, network &amp; incidents, lifecycle, third parties, dependencies, resilience</li>
           <li>Readings feed Pulsus Platform’s Operational Health</li>
@@ -672,12 +672,14 @@ footer a{color:#D8D1CE}
       </div>
       <div class="calc" aria-labelledby="calc-h">
         <p class="k" id="calc-h">What would it cost you?</p>
-        <label class="c-row2" for="c-users"><span>People who edit or administer</span><output id="c-users-out" for="c-users">12</output></label>
+        <label class="c-row2" for="c-ent-n"><span>Entities (companies)</span><output id="c-ent-out" for="c-ent-n">1</output></label>
+        <input id="c-ent-n" type="range" min="1" max="20" value="1" />
+        <label class="c-row2" for="c-users"><span>People who edit or administer, per entity</span><output id="c-users-out" for="c-users">12</output></label>
         <input id="c-users" type="range" min="1" max="60" value="12" />
-        <label class="c-row2" for="c-view"><span>People who only view</span><output id="c-view-out" for="c-view">30</output></label>
+        <label class="c-row2" for="c-view"><span>People who only view, per entity</span><output id="c-view-out" for="c-view">30</output></label>
         <input id="c-view" type="range" min="0" max="500" step="10" value="30" />
-        <div class="c-total" aria-live="polite"><span>Your monthly price</span><b id="c-total">$850</b><small id="c-break">$500 for 5 users + 7 more at $50. 30 viewers free.</small></div>
-        <p class="c-ent" id="c-ent" hidden>More than <span id="p-limit">50</span> editors? Self-service covers up to that; above it we set you up on an enterprise agreement. <a href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20enterprise">Talk to us</a>.</p>
+        <div class="c-total" aria-live="polite"><span>Your monthly price, all entities</span><b id="c-total">$850</b><small id="c-break">$500 for 5 users + 7 more at $50. 30 viewers free.</small></div>
+        <p class="c-ent" id="c-ent" hidden>More than <span id="p-limit">50</span> editors in an entity? Self-service covers up to that; above it we set you up on an enterprise agreement. <a href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20enterprise">Talk to us</a>.</p>
       </div>
     </div>
     <p class="fine rv">Prices are read live from the Pulsus price list. Taxes may apply depending on where you are.</p>
@@ -860,16 +862,17 @@ footer a{color:#D8D1CE}
   // ── Pricing: read live from the Pulsus price list, with today's prices as the fallback ──
   const P = { base: 500, inc: 5, extra: 50, trial: 14, limit: 50 };
   const usd = (n) => "$" + n.toLocaleString("en-US");
-  const cu = $("#c-users"), cv = $("#c-view");
+  const ce = $("#c-ent-n"), cu = $("#c-users"), cv = $("#c-view");
   const calc = () => {
-    const u = +cu.value, v = +cv.value, more = Math.max(0, u - P.inc), total = P.base + more * P.extra;
-    $("#c-users-out").textContent = u; $("#c-view-out").textContent = v === 500 ? "500+" : v;
+    const e = +ce.value, u = +cu.value, v = +cv.value, more = Math.max(0, u - P.inc), each = P.base + more * P.extra, total = each * e;
+    $("#c-ent-out").textContent = e; $("#c-users-out").textContent = u; $("#c-view-out").textContent = v === 500 ? "500+" : v;
     $("#c-total").textContent = usd(total);
-    $("#c-break").textContent = `${usd(P.base)} for ${P.inc} users${more ? ` + ${more} more at ${usd(P.extra)}` : ""}. ${v ? `${v === 500 ? "500+" : v} viewer${v === 1 ? "" : "s"} free.` : ""}`;
+    const per = `${usd(P.base)} for ${P.inc} users${more ? ` + ${more} more at ${usd(P.extra)}` : ""}`;
+    $("#c-break").textContent = e > 1 ? `${e} entities × ${usd(each)} (${per} each).${v ? " Viewers free." : ""}` : `${per}.${v ? ` ${v === 500 ? "500+" : v} viewer${v === 1 ? "" : "s"} free.` : ""}`;
     $("#c-ent").hidden = u <= P.limit;
   };
   const paint = () => { $("#p-base").textContent = usd(P.base); $("#p-inc").textContent = P.inc; $("#p-extra").textContent = usd(P.extra); $("#p-trial").textContent = P.trial; $("#p-limit").textContent = P.limit; calc(); };
-  cu.addEventListener("input", calc); cv.addEventListener("input", calc); paint();
+  ce.addEventListener("input", calc); cu.addEventListener("input", calc); cv.addEventListener("input", calc); paint();
   fetch("https://executive.pulsus.tech/api/pricing").then((r) => r.ok ? r.json() : null).then((d) => {
     const t = d && d.currency === "USD" && (d.products || []).find((x) => x.key === "tech");
     if (!t || !(t.monthly > 0)) return;
