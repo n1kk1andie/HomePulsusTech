@@ -69,7 +69,8 @@ section{padding:clamp(72px,10vw,128px) 0}
 .logo b span{color:var(--red2)}
 .logo small{display:block;font:600 9px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;color:var(--dmuted);margin-top:5px}
 .nav-links{display:flex;gap:26px;margin-left:auto;font-size:15px}
-.nav-links a{text-decoration:none;color:#E6E0DE;opacity:.85}
+.nav-links a{text-decoration:none;color:#E6E0DE;opacity:.85;white-space:nowrap}
+@media (max-width:1180px){.nav-links{gap:18px;font-size:14px}.nav .suite{display:none}.nav .btn{white-space:nowrap}}
 .nav-links a:hover{opacity:1;color:#fff}
 .nav .btn{padding:11px 18px;font-size:14px}
 .suite{font-size:13px;color:var(--dmuted);text-decoration:none;white-space:nowrap}
@@ -78,7 +79,7 @@ section{padding:clamp(72px,10vw,128px) 0}
 @media (max-width:520px){.suite{display:none}.logo small{display:none}}
 
 /* ── Hero ────────────────────────────────────────────── */
-.hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;padding:150px 0 110px}
+.hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;padding:116px 0 64px}
 .hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;background:
   radial-gradient(60% 50% at 78% 30%,rgba(228,1,43,.22),transparent 70%),
   radial-gradient(40% 40% at 12% 80%,rgba(22,36,63,.9),transparent 70%);pointer-events:none}
@@ -86,11 +87,13 @@ section{padding:clamp(72px,10vw,128px) 0}
 .ekg{position:absolute;left:0;right:0;top:58%;height:160px;opacity:.55;pointer-events:none}
 .ekg path{fill:none;stroke:url(#ekgGrad);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2600;stroke-dashoffset:2600;animation:draw 5.5s ease-in-out infinite}
 @keyframes draw{0%{stroke-dashoffset:2600}55%{stroke-dashoffset:0}100%{stroke-dashoffset:-2600}}
-.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:64px}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:center}
+@media (min-width:1180px){.hero .wrap{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:48px}.hero .wrap h1{font-size:clamp(44px,4.1vw,62px)}.hero .wrap h1 .l{white-space:nowrap}}
 .hero h1{font-size:clamp(38px,5.2vw,76px);font-weight:800;line-height:1.02}
 .hero h1 .l{display:block}
 .hero h1 .l:last-child{color:var(--red2)}
-.hero .lead{color:#CFC7C4;margin:28px 0 34px;max-width:620px}
+.hero .lead{color:#CFC7C4;margin:0 0 28px;max-width:620px}
+.hero .lead-1{margin:22px 0 12px;color:#fff;font-weight:500}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero-note{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--dmuted)}
 .hero-note b{color:#fff;font-weight:600}
@@ -105,6 +108,8 @@ section{padding:clamp(72px,10vw,128px) 0}
 @media (max-width:760px){.c-row{grid-template-columns:minmax(0,1fr)}}
 .c-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:13px}
 .c-head b{font:600 14px/1 var(--display)}
+.c-demo{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:#C9BFBC;border:1px dashed #4A444D;border-radius:999px;padding:6px 10px}
+.c-demo::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber)}
 .c-live{display:inline-flex;align-items:center;gap:7px;font:500 11.5px/1 var(--mono);color:var(--dmuted);background:#1F1C22;border:1px solid var(--dline);border-radius:999px;padding:6px 10px}
 .c-live i{width:7px;height:7px;border-radius:50%;background:var(--red2);animation:blink 1.4s infinite}
 @keyframes blink{50%{opacity:.25}}
@@ -127,7 +132,7 @@ section{padding:clamp(72px,10vw,128px) 0}
 .pill{font:700 9.5px/1 var(--text);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:5px 8px}
 .p-r{background:rgba(255,51,85,.15);color:#FF6B84}.p-a{background:rgba(245,167,66,.15);color:#F5B25F}.p-g{background:rgba(61,220,132,.13);color:#5BE39A}
 .c-feed::after{content:"";position:absolute;inset:auto 0 0;height:30px;background:linear-gradient(transparent,#1C191E)}
-@media (max-width:980px){.hero{padding:120px 0 80px}.hero .wrap{gap:48px}.console{transform:none}}
+@media (max-width:980px){.hero{padding:100px 0 52px}.hero .wrap{gap:32px}.console{transform:none}}
 @media (max-width:520px){.c-kpis{grid-template-columns:repeat(2,1fr)}.kpi b{font-size:20px}}
 
 /* ── Marquee of signals ──────────────────────────────── */
@@ -292,6 +297,9 @@ input[type=range]{width:100%;accent-color:var(--red);height:28px}
 .flow .row.me{background:var(--ink);color:#fff}
 .flow .row.me small{color:#B8AFAC}
 .flow .row .sc{margin-left:auto;font:800 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.flow .drivers{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.flow .drivers span{font:600 12px/1 var(--text);padding:7px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--bg)}
+.flow .drivers .on{background:var(--red);border-color:var(--red);color:#fff}
 .flow .down{justify-self:center;color:var(--red);font-size:20px;line-height:1}
 .textlink{color:var(--red);font-weight:600;text-decoration:none}
 .textlink:hover{text-decoration:underline}
@@ -418,19 +426,18 @@ footer a{color:#D8D1CE}
   <div class="wrap">
     <div>
       <p class="eyebrow">Pulsus Tech · Technology risk &amp; operational intelligence</p>
-      <h1 id="hero-h" style="margin-top:20px"><span class="l">Know what’s running.</span><span class="l">Understand what’s at risk.</span><span class="l">Act before it’s a problem.</span></h1>
-      <p class="lead">One live view of the applications, networks, vendors and ageing systems your institution runs on, and of the risk building up inside them.</p>
+      <h1 id="hero-h" style="margin-top:18px"><span class="l">See the risk.</span><span class="l">Know the impact.</span></h1>
+      <p class="lead lead-1">Your technology estate is interconnected. Your intelligence should be too.</p>
+      <p class="lead">Pulsus Tech brings applications, infrastructure, vendors, incidents and operational dependencies into one connected view — helping leaders identify exposure before it becomes disruption.</p>
       <div class="hero-cta">
         <a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo <span class="arr" aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="https://executive.pulsus.tech/signup?product=tech&amp;return=https%3A%2F%2Fabouttech.pulsus.tech%2F">Start a 14-day free trial</a>
       </div>
       <p class="hero-demo">The demo is the real product with built-in demonstration data. No sign-up. <a href="#scenarios">Or try a scenario first ↓</a></p>
-      <p class="hero-note"><span><i aria-hidden="true"></i><b>Live intelligence</b></span><span><b>Actionable signals</b></span><span><b>Executive clarity</b></span><span><b>Stronger resilience</b></span></p>
     </div>
 
     <figure class="console" aria-label="Demonstration: the Pulsus Tech command center, with example figures" style="margin:0">
-      <p class="demo-tag" style="margin:0 0 10px">Demonstration data</p>
-      <div class="c-head"><b>Technology Command Center</b><span class="c-live"><i aria-hidden="true"></i><span id="clock">Live</span></span></div>
+      <div class="c-head"><b>Technology Command Center</b><span class="c-demo" title="Example figures, not a real institution">Demo</span></div>
       <div class="c-kpis">
         <div class="kpi"><small>Tech stability</small><b class="g" data-count="94" data-suffix="%">94%</b><span>Stable</span></div>
         <div class="kpi"><small>Operational risk</small><b class="a">Medium</b><span>Manageable</span></div>
@@ -636,12 +643,12 @@ footer a{color:#D8D1CE}
       <p style="margin-top:22px"><a class="textlink" href="https://about.pulsus.tech/demo/">See it in the Pulsus Platform demo →</a></p>
     </div>
     <div class="flow rv" aria-label="How Pulsus Tech feeds Pulsus Platform">
-      <p class="demo-tag light" style="margin:0">Demonstration scores</p>
       <div class="row"><div><b>Pulsus Tech</b><small>Availability · end of support · incidents · third parties</small></div></div>
       <span class="down" aria-hidden="true">↓</span>
-      <div class="row"><div><b>Technology driver</b><small>One of the drivers of Operational Health</small></div><span class="sc" style="color:var(--amber)">71</span></div>
+      <div class="row"><div><b>Technology driver</b><small>What your technology readings add up to</small></div></div>
+      <div class="drivers" aria-label="Read beside the other drivers"><span class="on">Technology</span><span>Service</span><span>Quality</span><span>Risk</span><span>People</span></div>
       <span class="down" aria-hidden="true">↓</span>
-      <div class="row me"><div><b>Operational Health</b><small>Pulsus Platform · read with every other driver</small></div><span class="sc">83</span></div>
+      <div class="row me"><div><b>Operational Health</b><small>Pulsus Platform · every driver read together</small></div></div>
     </div>
   </div>
 </section>
@@ -723,9 +730,7 @@ footer a{color:#D8D1CE}
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll(".rv").forEach((x, i) => { x.style.transitionDelay = `${(i % 4) * 60}ms`; io.observe(x); });
 
-  // Console: a clock, counting figures, and a feed that keeps moving.
-  const clock = $("#clock"); const tick = () => { clock.textContent = "Live · " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }); };
-  tick(); setInterval(tick, 1000);
+  // Console: counting figures, and a feed that keeps moving.
   if (!reduce) document.querySelectorAll("[data-count]").forEach((b) => {
     const to = +b.dataset.count, dec = +(b.dataset.dec || 0), suf = b.dataset.suffix || ""; const t0 = performance.now();
     const step = (t) => { const k = Math.min(1, (t - t0) / 1600), e = 1 - Math.pow(1 - k, 3); b.textContent = (to * e).toFixed(dec) + suf; if (k < 1) requestAnimationFrame(step); };
