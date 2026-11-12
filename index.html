@@ -394,6 +394,28 @@ footer a{color:#D8D1CE}
 .c-ent{margin:6px 0 0;padding:12px 14px;border-radius:12px;background:#2A1A1F;border:1px solid #5A2733;font-size:14px;color:#F3D6DC}
 .c-ent a{color:#fff}
 @media (max-width:900px){.price{grid-template-columns:minmax(0,1fr)}}
+/* integrations, FAQ, sign-in link */
+.signin{font-size:15px;color:#E6E0DE;text-decoration:none;white-space:nowrap;opacity:.9}
+.signin:hover{opacity:1;color:#fff}
+@media (max-width:980px){.signin{margin-left:auto}.nav .btn{margin-left:14px}}
+@media (max-width:430px){.nav .btn{padding:12px 16px;font-size:14px}.signin{font-size:14px}}
+.logos{display:flex;flex-wrap:wrap;gap:10px}
+.logos span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font:600 15px/1.2 var(--text);color:var(--ink)}
+.int-points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}
+.int-points div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.int-points b{font-family:var(--display);font-size:18px}
+.int-points p{margin:8px 0 0;color:var(--ink2);font-size:15.5px}
+@media (max-width:820px){.int-points{grid-template-columns:minmax(0,1fr)}}
+.faq{max-width:860px}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq summary{cursor:pointer;list-style:none;font:600 18px/1.4 var(--display);padding:18px 40px 18px 0;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:14px;font:400 26px/1 var(--text);color:var(--red)}
+.faq details[open] summary::after{content:"–"}
+.faq details>div{padding:0 0 20px;color:var(--ink2);font-size:16.5px;max-width:720px}
+.faq a{color:var(--red)}
+.faq-list{margin:4px 0 0;padding-left:22px}
+.f-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14.5px}.f-links a{color:var(--dmuted);text-decoration:none}.f-links a:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -402,16 +424,14 @@ footer a{color:#D8D1CE}
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Pulsus Tech, back to top"><span class="mark" aria-hidden="true"></span><span><b>Pulsus <span>Tech</span></b><small>Technology risk intelligence</small></span></a>
-    <nav class="nav-links" aria-label="On this page">
-      <a href="#evidence">Evidence</a>
-      <a href="#scenarios">Scenarios</a>
-      <a href="#lifecycle">Lifecycle</a>
-      <a href="#views">Six views</a>
-      <a href="#more">Built in</a>
-      <a href="#regulation">Regulation</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#product">Product</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#integrations">Integrations</a>
       <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </nav>
-    <a class="suite" href="https://about.pulsus.tech/">← Pulsus Intelligence Suite</a>
+    <a class="signin" href="https://tech.pulsus.tech/login">Sign in</a>
     <a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo</a>
   </div>
 </header>
@@ -434,7 +454,7 @@ footer a{color:#D8D1CE}
         <a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo <span class="arr" aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="https://tech.pulsus.tech/signup">Start a 14-day free trial</a>
       </div>
-      <p class="hero-demo">The demo is the real product with built-in demonstration data. No sign-up. <a href="#scenarios">Or try a scenario first ↓</a></p>
+      <p class="hero-demo">The demo is the real product with example data. No sign-up.</p>
     </div>
 
     <figure class="console" aria-label="Demonstration: the Pulsus Tech command center, with example figures" style="margin:0">
@@ -472,10 +492,10 @@ footer a{color:#D8D1CE}
 </div></div>
 
 <!-- ── The problem ── -->
-<section aria-labelledby="cost-h">
+<section id="why" aria-labelledby="cost-h">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">The problem</p>
+      <p class="eyebrow">Why Pulsus Tech</p>
       <h2 id="cost-h">Fragmented oversight is <em>expensive.</em></h2>
       <p class="lead">When technology risk lives in spreadsheets, vendor emails and separate monitoring tools, nobody sees the whole picture until something breaks.</p>
     </div>
@@ -492,7 +512,7 @@ footer a{color:#D8D1CE}
 <section class="evidence" id="evidence" aria-labelledby="ev-h">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">The evidence · published research</p>
+      <p class="eyebrow">What’s at stake</p>
       <h2 id="ev-h">Technology risk is now <em>a balance-sheet risk.</em></h2>
       <p class="lead">These are not our numbers. They come from the industry’s own annual studies and from supervisors, and every one links to its source.</p>
     </div>
@@ -501,10 +521,21 @@ footer a{color:#D8D1CE}
       <a class="ev rv" href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener"><b>48%</b><span>of data breaches involved a third party, up from 30% a year earlier.</span><small>Verizon, <i>Data Breach Investigations Report</i>, 2026 ↗</small></a>
       <a class="ev rv" href="https://intelligence.uptimeinstitute.com/resource/annual-outage-analysis-2026" target="_blank" rel="noopener"><b>57%</b><span>of organisations said their last major outage cost more than $100,000; one in five, more than $1 million.</span><small>Uptime Institute, <i>Annual Outage Analysis</i>, 2026 ↗</small></a>
       <a class="ev rv" href="https://www.ibm.com/reports/data-breach" target="_blank" rel="noopener"><b>$6.29M</b><span>average cost of a data breach in financial services, against $4.99M across all industries.</span><small>IBM, <i>Cost of a Data Breach Report</i>, 2026 ↗</small></a>
-      <a class="ev rv" href="https://parametrixinsurance.com/in-the-news/crowdstrike-to-cost-fortune-500-5-4-billion-insured-loss-range-of-540-million-to-1-08-billion" target="_blank" rel="noopener"><b>$5.4B</b><span>estimated direct loss to US Fortune 500 companies from one faulty security-software update on 19 July 2024. About 8.5 million Windows devices failed worldwide.</span><small>Parametrix estimate, July 2024 ↗</small></a>
-      <a class="ev rv" href="https://www.esma.europa.eu/press-news/esma-news/european-supervisory-authorities-designate-critical-ict-third-party-providers" target="_blank" rel="noopener"><b>19</b><span>technology providers now designated critical to the EU financial system and placed under direct supervision.</span><small>European Supervisory Authorities, under DORA, November 2025 ↗</small></a>
     </div>
-    <p class="ev-foot rv">For European banks, cyber and ICT risk is “by far the most prominent driver of operational risk”. <a class="textlink" href="https://www.eba.europa.eu/publications-and-media/publications/risk-assessment-report-december-2025" target="_blank" rel="noopener">EBA Risk Assessment Report, December 2025 ↗</a></p>
+  </div>
+</section>
+
+<!-- ── Six views ── -->
+<section id="product" aria-labelledby="views-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Product</p>
+      <h2 id="views-h">One platform. <em>Six connected views.</em></h2>
+    </div>
+    <div class="views rv">
+      <div class="vtabs" role="tablist" aria-label="Six views" id="vtabs"></div>
+      <div id="vpanels"></div>
+    </div>
   </div>
 </section>
 
@@ -512,7 +543,7 @@ footer a{color:#D8D1CE}
 <section class="deps" id="scenarios" aria-labelledby="sc-h">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">Scenarios · try it</p>
+      <p class="eyebrow">See it in action</p>
       <h2 id="sc-h">Choose a technology problem. <em>See what it costs, and what to do.</em></h2>
       <p class="lead">Each scenario plays out on an example institution: what fails, who is affected, and the decisions management has to take, with an owner and a deadline.</p>
     </div>
@@ -532,7 +563,7 @@ footer a{color:#D8D1CE}
 <section id="lifecycle" aria-labelledby="life-h">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">Technology lifecycle · try it</p>
+      <p class="eyebrow">See it in action · technology lifecycle</p>
       <h2 id="life-h">Replace ageing technology on <em>your</em> timetable.</h2>
       <p class="lead">See end-of-life and end-of-support exposure before it becomes an operational, security or resilience problem. Move the horizon to see what ages out.</p>
     </div>
@@ -557,77 +588,11 @@ footer a{color:#D8D1CE}
   </div>
 </section>
 
-<!-- ── Six views ── -->
-<section id="views" aria-labelledby="views-h" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">The platform</p>
-      <h2 id="views-h">One platform. <em>Six connected views.</em></h2>
-    </div>
-    <div class="views rv">
-      <div class="vtabs" role="tablist" aria-label="Six views" id="vtabs"></div>
-      <div id="vpanels"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Questions ── -->
-<section aria-labelledby="qa-h" style="padding-top:0">
-  <div class="wrap">
-    <div class="qa rv">
-      <div>
-        <p class="eyebrow" style="color:#FF8099">Seven questions, answered</p>
-        <h2 id="qa-h" style="margin-top:18px;font-size:clamp(30px,3.6vw,46px)">From technology data to management <em>decisions.</em></h2>
-        <p class="lead" style="margin-top:18px">Pulsus Tech turns what your technology estate is doing into the answers management, audit and the board actually ask for.</p>
-        <div class="benefits">
-          <div>One consolidated view across technology, services, vendors and contracts</div>
-          <div>Proactive identification of gaps, exposures and risks</div>
-          <div>Evidence for management, audit and regulatory reporting</div>
-          <div>Built for scale, integration and continuous insight</div>
-        </div>
-      </div>
-      <ol class="qlist">
-        <li>What is critical?</li>
-        <li>What is underperforming?</li>
-        <li>What is approaching end of support?</li>
-        <li>Where are our concentrations and dependencies?</li>
-        <li>Which third-party arrangements need attention?</li>
-        <li>Where are the resilience and contractual gaps?</li>
-        <li>And where should management act first?</li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- ── Also built in ── -->
-<section id="more" aria-labelledby="more-h" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">Also built in</p>
-      <h2 id="more-h">More than the six views. <em>Ready on day one.</em></h2>
-    </div>
-    <div class="roles">
-      <article class="role rv"><h3>Connectors</h3><p>Outages and availability pulled in every day from ServiceNow, Datadog, ManageEngine ServiceDesk Plus and OpManager, Freshservice and Zabbix. Nothing counts until an approver accepts it.</p></article>
-      <article class="role rv"><h3>Open API &amp; webhooks</h3><p>Read services, availability, outages and platforms, and record outages from your own systems. Signed webhooks tell your tools when something happens.</p></article>
-      <article class="role rv"><h3>Software licences &amp; renewals</h3><p>What you pay for, when each renews and by when to give notice. Tools doing the same job and seats paid for but unused are flagged before they roll over.</p></article>
-      <article class="role rv"><h3>Repeat outages</h3><p>A service that keeps failing is flagged automatically, with one tap to open a problem record and fix the cause, not the symptom.</p></article>
-      <article class="role rv"><h3>Security posture</h3><p>Vulnerabilities past your patching policy and how current each platform is, beside its end-of-support date.</p></article>
-      <article class="role rv"><h3>Capacity &amp; discovery</h3><p>Capacity heading for its limit, forecast before it gets there, and devices found on your network that aren’t in the register yet.</p></article>
-      <article class="role rv"><h3>Problems, changes &amp; approvals</h3><p>Problem and change records linked to the outages they explain, and a maker-checker step on every change, with a full history of who did what.</p></article>
-      <article class="role rv"><h3>Alerts where you work</h3><p>Missed service levels, end-of-support dates, renewals and overdue actions, by email, Microsoft Teams or Slack, and in the alerts bell.</p></article>
-      <article class="role rv"><h3>Board-ready reports</h3><p>Availability, lifecycle, outsourcing and disruption reports, with an optional AI-drafted board summary on your own key, built from figures only.</p></article>
-      <article class="role rv"><h3>Start from a spreadsheet</h3><p>A branded starter workbook with drop-downs and guidance on every column. Fill it in, upload it, and your dashboards light up the same day.</p></article>
-      <article class="role rv"><h3>Secure sign-in</h3><p>One Pulsus account, with two-step sign-in through an authenticator app and single sign-on for companies that use Microsoft or another identity provider.</p></article>
-      <article class="role rv"><h3>English &amp; Spanish</h3><p>Every screen, message and report in both languages, chosen by each person.</p></article>
-    </div>
-  </div>
-</section>
-
 <!-- ── Roles ── -->
-<section aria-labelledby="roles-h" style="padding-top:0">
+<section id="solutions" aria-labelledby="roles-h" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">Who it’s for</p>
+      <p class="eyebrow">Solutions</p>
       <h2 id="roles-h">Built for the people who <em>answer for technology.</em></h2>
     </div>
     <div class="roles">
@@ -640,11 +605,30 @@ footer a{color:#D8D1CE}
   </div>
 </section>
 
+<!-- ── Integrations ── -->
+<section id="integrations" aria-labelledby="int-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Integrations</p>
+      <h2 id="int-h">Works with the tools <em>you already have.</em></h2>
+      <p class="lead">Keep your service desk and monitoring. Pulsus Tech reads from them every day, so there is nothing to re-key and nothing to replace.</p>
+    </div>
+    <div class="logos rv" aria-label="Connects to">
+      <span>ServiceNow</span><span>Datadog</span><span>ManageEngine ServiceDesk Plus</span><span>ManageEngine OpManager</span><span>Freshservice</span><span>Zabbix</span><span>Microsoft Excel</span>
+    </div>
+    <div class="int-points rv">
+      <div><b>Alerts where your team works</b><p>Email, Microsoft Teams or Slack, the moment something needs attention.</p></div>
+      <div><b>English and Spanish</b><p>Every screen and report in both languages, chosen by each person.</p></div>
+      <div><b>Your own systems too</b><p>An open API connects anything else you run.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Regulation ── -->
 <section id="regulation" aria-labelledby="reg-h" style="padding-top:0">
   <div class="wrap reg">
     <div class="rv">
-      <p class="eyebrow">Regulatory readiness</p>
+      <p class="eyebrow">Compliance</p>
       <h2 id="reg-h" style="margin-top:18px">Evidence, <em>not another register.</em></h2>
       <p class="lead" style="margin-top:18px">Pulsus Tech brings technology, service, outsourcing and resilience information together, so the evidence supervisors increasingly expect is already assembled, current and traceable.</p>
       <p class="big-quote">A live technology risk intelligence layer <span>for the whole institution.</span></p>
@@ -693,7 +677,7 @@ footer a{color:#D8D1CE}
         <p class="sub">An entity is one company. Each includes <b id="p-inc">5</b> users; each further user is <b id="p-extra">$50</b> a month. People who only view are free. A group with several companies pays for each one.</p>
         <ul class="incl">
           <li>All six views: applications, network &amp; incidents, lifecycle, third parties, dependencies, resilience</li>
-          <li>Everything built in: connectors, API &amp; webhooks, licences &amp; renewals, alerts, reports</li>
+          <li>Connectors, alerts and board-ready reports included</li>
           <li>Readings feed Pulsus Platform’s Operational Health</li>
           <li>Sign-in with your Pulsus account; roles for owners, admins and editors</li>
         </ul>
@@ -719,6 +703,29 @@ footer a{color:#D8D1CE}
   </div>
 </section>
 
+<!-- ── FAQ ── -->
+<section id="faq" aria-labelledby="faq-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-h">Frequently asked <em>questions.</em></h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>What does Pulsus Tech do?</summary><div>It brings your applications, infrastructure, vendors, outages and contracts into one view, so leaders can see technology risk and its business impact before it becomes disruption.</div></details>
+      <details><summary>Which questions does it answer for management?</summary><div><ol class='faq-list'><li>What is critical?</li><li>What is underperforming?</li><li>What is approaching end of support?</li><li>Where are our concentrations and dependencies?</li><li>Which third-party arrangements need attention?</li><li>Where are the resilience and contractual gaps?</li><li>And where should management act first?</li></ol></div></details>
+      <details><summary>Who is it for?</summary><div>CIOs and CTOs, COOs, risk and compliance teams, and boards in any organisation where technology is critical: banks, credit unions, insurers, hospitals, telecoms, utilities and the public sector.</div></details>
+      <details><summary>Do we have to replace our existing tools?</summary><div>No. Pulsus Tech connects to ServiceNow, Datadog, ManageEngine, Freshservice and Zabbix, and takes a simple Excel workbook for anything else.</div></details>
+      <details><summary>How quickly can we get started?</summary><div>The same day. Sign up, add your business units, then upload the starter workbook or connect a system. Your dashboards fill in as soon as the figures arrive.</div></details>
+      <details><summary>How does the free trial work?</summary><div>You get 14 days with everything included and no card needed. When it ends, choose a plan to carry on; your figures and settings are kept.</div></details>
+      <details><summary>How much does it cost?</summary><div>US$500 per company per month, including 5 users. Each further user is US$50 a month, and people who only view are free. See <a href='#pricing'>Pricing</a>.</div></details>
+      <details><summary>Is our data secure?</summary><div>Each company's data is kept separate and encrypted. Sign-in supports two-step verification and single sign-on, and every change is recorded with who made it and when.</div></details>
+      <details><summary>Which languages does it support?</summary><div>English and Spanish. Each person chooses their own.</div></details>
+      <details><summary>Will it make us compliant with DORA or other regulations?</summary><div>It gives you the evidence supervisors expect, assembled and current, but it does not certify compliance with any regulation.</div></details>
+      <details><summary>Can we see it before signing up?</summary><div>Yes. The <a href='https://demo-ict.pulsus.tech/'>live demo</a> is the real product with example data, and needs no sign-up.</div></details>
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA ── -->
 <section class="cta" aria-labelledby="cta-h">
   <div class="wrap">
@@ -734,6 +741,7 @@ footer a{color:#D8D1CE}
   <div class="wrap">
     <div class="f-top">
       <a class="logo" href="#top"><span class="mark" aria-hidden="true"></span><span><b>Pulsus <span>Tech</span></b><small>Technology risk intelligence</small></span></a>
+      <nav class="f-links" aria-label="Footer"><a href="#product">Product</a><a href="#solutions">Solutions</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="https://tech.pulsus.tech/login">Sign in</a><a href="mailto:info@pulsus.tech">Contact</a><a href="https://tech.pulsus.tech/privacy">Privacy</a><a href="https://tech.pulsus.tech/terms">Terms</a></nav>
       <div class="f-pillars"><span>Live intelligence</span><span>Actionable signals</span><span>Executive clarity</span><span>Stronger resilience</span></div>
     </div>
     <div class="f-bot">
