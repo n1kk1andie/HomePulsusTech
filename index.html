@@ -723,6 +723,9 @@ footer a{color:#D8D1CE}
   const $ = (s, r = document) => r.querySelector(s);
   const el = (tag, attrs = {}, ns) => { const e = ns ? document.createElementNS("http://www.w3.org/2000/svg", tag) : document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
 
+  // Always open at the top of the hero (unless a link points at a section):
+  // browsers otherwise restore an old scroll position on reload, cutting the headline off under the bar.
+  if (!location.hash && "scrollRestoration" in history) { history.scrollRestoration = "manual"; scrollTo(0, 0); }
   // Nav turns solid once the hero scrolls away.
   const nav = $("#nav"); const onScroll = () => nav.classList.toggle("solid", scrollY > 40); addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
