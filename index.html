@@ -154,7 +154,8 @@ section{padding:clamp(72px,10vw,128px) 0}
 /* ── Dependency map (interactive) ────────────────────── */
 .deps{background:var(--dark);color:#fff;position:relative;overflow:hidden}
 .deps .lead{color:#CFC7C4}
-.deps-ui{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:stretch}
+.deps-ui{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (min-width:981px){.deps .map{position:sticky;top:92px}}
 .map{background:#17141A;border:1px solid var(--dline);border-radius:var(--r);padding:16px;position:relative}
 .map svg{width:100%;height:auto}
 .tier{font:600 10.5px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;fill:#6F676D}
@@ -183,7 +184,8 @@ section{padding:clamp(72px,10vw,128px) 0}
 .chips button{background:#211D24;border:1px solid var(--dline);border-radius:999px;padding:8px 13px;font-size:13.5px;cursor:pointer;color:#E8E2E0}
 .chips button[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
 @media (max-width:980px){.deps-ui{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:700px){.map{overflow-x:auto;-webkit-overflow-scrolling:touch}.map svg{min-width:680px}.map::after{content:"Swipe to see the whole map →";display:block;font-size:12.5px;color:var(--dmuted);margin-top:8px}}
+.swipe{display:none}
+@media (max-width:700px){.map-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.map-scroll svg{min-width:680px}.swipe{display:inline}}
 
 /* ── Lifecycle horizon (interactive) ─────────────────── */
 .horizon{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,36px);box-shadow:0 30px 60px -40px rgba(20,16,15,.25)}
@@ -308,6 +310,55 @@ footer .wrap{display:grid;gap:26px}
 .f-pillars{display:flex;flex-wrap:wrap;gap:8px 22px;font:600 12px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:#6E6669}
 .f-bot{border-top:1px solid #221E24;padding-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a{color:#D8D1CE}
+
+/* demonstration labels */
+.demo-tag{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:#C9BFBC;border:1px dashed #4A444D;border-radius:999px;padding:6px 10px;margin:0 0 12px}
+.demo-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber)}
+.demo-tag.light{color:var(--muted);border-color:#D9D0CB}
+
+/* global evidence */
+.evidence{background:var(--paper);border-block:1px solid var(--line)}
+.ev-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.ev{background:var(--paper);padding:30px 28px 26px;display:grid;gap:12px;align-content:start;text-decoration:none;transition:background .25s ease}
+.ev:hover{background:#FCFAF9}
+.ev b{font:800 clamp(44px,5vw,64px)/1 var(--display);letter-spacing:-.03em;color:var(--ink)}
+.ev:nth-child(2) b,.ev:nth-child(5) b{color:var(--red)}
+.ev span{font-size:16px;color:var(--ink2);line-height:1.5}
+.ev small{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+.ev:hover small{color:var(--red)}
+.ev-foot{margin-top:22px;font-size:15.5px;color:var(--ink2)}
+@media (max-width:900px){.ev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ev-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* scenarios */
+.sc-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.sc-tab{text-align:left;background:#1B181E;border:1px solid var(--dline);border-radius:14px;padding:14px 16px;cursor:pointer;font:600 15px/1.3 var(--display);color:#EDE7E5;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.sc-tab small{display:block;font:500 12px/1 var(--mono);color:var(--dmuted);margin-bottom:8px}
+.sc-tab:hover{border-color:#5A535D;transform:translateY(-2px)}
+.sc-tab[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.sc-tab[aria-selected="true"] small{color:#FFD0D8}
+@media (max-width:980px){.sc-tabs{display:flex;overflow-x:auto;margin:0 -24px 18px;padding:2px 24px 6px;scroll-snap-type:x mandatory}.sc-tab{flex:none;width:200px;scroll-snap-align:start}}
+.readout{gap:20px}
+.readout .step{display:grid;gap:10px;padding-bottom:18px;border-bottom:1px solid #2A262D}
+.readout .k{display:flex;align-items:center;gap:10px}
+.readout .sn{width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:700 11.5px/1 var(--text);letter-spacing:0}
+.readout h3{font-size:26px}
+.readout .what{margin:0;color:#DCD5D3;font-size:15.5px}
+.impact{display:flex;align-items:center;gap:14px;margin:0;color:#CFC7C4;font-size:14.5px;line-height:1.4}
+.impact b{color:#fff;font-weight:600}
+.readout .big{font-size:56px}
+.cons,.acts{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.cons li{display:block;position:relative;padding-left:18px;color:#DCD5D3;font-size:14.5px;border:0}
+.cons li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--red2)}
+.acts{counter-reset:a}
+.acts li{counter-increment:a;display:grid;grid-template-columns:26px 1fr;gap:4px 8px;font-size:14.5px;color:#fff;border:0;padding:0}
+.acts li::before{content:counter(a);grid-row:span 2;width:22px;height:22px;border-radius:6px;background:#2A252E;color:#FF8099;display:grid;place-items:center;font:700 12px/1 var(--mono)}
+.acts li em{font-style:normal;color:var(--dmuted);font-size:12.5px}
+.seen{margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--dmuted)}
+.seen span{background:#221E25;border:1px solid var(--dline);border-radius:999px;padding:5px 10px;color:#E8E2E0}
+.real{margin:0;background:#1F1A16;border:1px solid #4A3A22;border-radius:12px;padding:12px 14px;font-size:14px;color:#E9DCC7}
+.real b{color:#F5B25F}
+.real a{color:#F5B25F;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -317,7 +368,8 @@ footer a{color:#D8D1CE}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Pulsus Tech, back to top"><span class="mark" aria-hidden="true"></span><span><b>Pulsus <span>Tech</span></b><small>Technology risk intelligence</small></span></a>
     <nav class="nav-links" aria-label="On this page">
-      <a href="#dependencies">Dependencies</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#scenarios">Scenarios</a>
       <a href="#lifecycle">Lifecycle</a>
       <a href="#views">Six views</a>
       <a href="#regulation">Regulation</a>
@@ -342,12 +394,13 @@ footer a{color:#D8D1CE}
       <p class="lead">One live view of the applications, networks, vendors and ageing systems your institution runs on, and of the risk building up inside them.</p>
       <div class="hero-cta">
         <a class="btn btn-red" href="https://about.pulsus.tech/demo/?app=Tech#ask">See where your tech risks are hiding <span class="arr" aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#dependencies">Pull a thread</a>
+        <a class="btn btn-ghost" href="#scenarios">Try a scenario</a>
       </div>
       <p class="hero-note"><span><i aria-hidden="true"></i><b>Live intelligence</b></span><span><b>Actionable signals</b></span><span><b>Executive clarity</b></span><span><b>Stronger resilience</b></span></p>
     </div>
 
-    <figure class="console" aria-label="Illustration: the Pulsus Tech command center, with example figures" style="margin:0">
+    <figure class="console" aria-label="Demonstration: the Pulsus Tech command center, with example figures" style="margin:0">
+      <p class="demo-tag" style="margin:0 0 10px">Demonstration data</p>
       <div class="c-head"><b>Technology Command Center</b><span class="c-live"><i aria-hidden="true"></i><span id="clock">Live</span></span></div>
       <div class="c-kpis">
         <div class="kpi"><small>Tech stability</small><b class="g" data-count="94" data-suffix="%">94%</b><span>Stable</span></div>
@@ -398,26 +451,43 @@ footer a{color:#D8D1CE}
   </div>
 </section>
 
-<!-- ── Dependencies ── -->
-<section class="deps" id="dependencies" aria-labelledby="deps-h">
+<!-- ── Global evidence ── -->
+<section class="evidence" id="evidence" aria-labelledby="ev-h">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">Dependency intelligence · try it</p>
-      <h2 id="deps-h">Pull one thread. <em>See what unravels.</em></h2>
-      <p class="lead">Every customer service rests on systems, networks, vendors and their vendors. Choose any one of them to see everything that fails with it.</p>
+      <p class="eyebrow">The evidence · published research</p>
+      <h2 id="ev-h">Technology risk is now <em>a balance-sheet risk.</em></h2>
+      <p class="lead">These are not our numbers. They come from the industry’s own annual studies and from supervisors, and every one links to its source.</p>
     </div>
+    <div class="ev-grid">
+      <a class="ev rv" href="https://www.oxfordeconomics.com/resource/the-hidden-costs-of-downtime-2026/" target="_blank" rel="noopener"><b>$600B</b><span>a year lost to unplanned downtime by the world’s 2,000 largest companies, up 50% in two years.</span><small>Splunk &amp; Oxford Economics, <i>The Hidden Costs of Downtime</i>, 2026 ↗</small></a>
+      <a class="ev rv" href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener"><b>48%</b><span>of data breaches involved a third party, up from 30% a year earlier.</span><small>Verizon, <i>Data Breach Investigations Report</i>, 2026 ↗</small></a>
+      <a class="ev rv" href="https://intelligence.uptimeinstitute.com/resource/annual-outage-analysis-2026" target="_blank" rel="noopener"><b>57%</b><span>of organisations said their last major outage cost more than $100,000; one in five, more than $1 million.</span><small>Uptime Institute, <i>Annual Outage Analysis</i>, 2026 ↗</small></a>
+      <a class="ev rv" href="https://www.ibm.com/reports/data-breach" target="_blank" rel="noopener"><b>$6.29M</b><span>average cost of a data breach in financial services, against $4.99M across all industries.</span><small>IBM, <i>Cost of a Data Breach Report</i>, 2026 ↗</small></a>
+      <a class="ev rv" href="https://parametrixinsurance.com/in-the-news/crowdstrike-to-cost-fortune-500-5-4-billion-insured-loss-range-of-540-million-to-1-08-billion" target="_blank" rel="noopener"><b>$5.4B</b><span>estimated direct loss to US Fortune 500 companies from one faulty security-software update on 19 July 2024. About 8.5 million Windows devices failed worldwide.</span><small>Parametrix estimate, July 2024 ↗</small></a>
+      <a class="ev rv" href="https://www.esma.europa.eu/press-news/esma-news/european-supervisory-authorities-designate-critical-ict-third-party-providers" target="_blank" rel="noopener"><b>19</b><span>technology providers now designated critical to the EU financial system and placed under direct supervision.</span><small>European Supervisory Authorities, under DORA, November 2025 ↗</small></a>
+    </div>
+    <p class="ev-foot rv">For European banks, cyber and ICT risk is “by far the most prominent driver of operational risk”. <a class="textlink" href="https://www.eba.europa.eu/publications-and-media/publications/risk-assessment-report-december-2025" target="_blank" rel="noopener">EBA Risk Assessment Report, December 2025 ↗</a></p>
+  </div>
+</section>
+
+<!-- ── Scenarios ── -->
+<section class="deps" id="scenarios" aria-labelledby="sc-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Scenarios · try it</p>
+      <h2 id="sc-h">Choose a technology problem. <em>See what it costs, and what to do.</em></h2>
+      <p class="lead">Each scenario plays out on an example institution: what fails, who is affected, and the decisions management has to take, with an owner and a deadline.</p>
+    </div>
+    <div class="sc-tabs rv" role="tablist" aria-label="Technology risk scenarios" id="sc-tabs"></div>
     <div class="deps-ui rv">
       <div class="map">
-        <svg id="depmap" viewBox="0 0 760 470" role="group" aria-label="Example dependency map of an institution. Choose a system to see what depends on it."></svg>
+        <p class="demo-tag">Demonstration · an example institution</p>
+        <div class="map-scroll"><svg id="depmap" viewBox="0 0 760 470" role="group" aria-label="Dependency map of an example institution. Choose a system to see what depends on it."></svg></div>
+        <p class="hint" style="margin:6px 4px 0">Or pull any thread yourself: tap a box on the map.<span class="swipe"> Swipe sideways to see all of it.</span></p>
       </div>
-      <aside class="readout" aria-live="polite" id="readout">
-        <p class="k">Choose a system</p>
-        <h3>Nothing selected</h3>
-        <p class="hint">Tap a box on the map, or pick one here:</p>
-        <div class="chips" id="chips"></div>
-      </aside>
+      <aside class="readout" aria-live="polite" id="readout"></aside>
     </div>
-    <p class="fine rv" style="color:#7D7578">An illustrative institution. Your own map is built from your applications, services, vendors and contracts.</p>
   </div>
 </section>
 
@@ -430,6 +500,7 @@ footer a{color:#D8D1CE}
       <p class="lead">See end-of-life and end-of-support exposure before it becomes an operational, security or resilience problem. Move the horizon to see what ages out.</p>
     </div>
     <div class="horizon rv">
+      <p class="demo-tag light">Demonstration · an example estate</p>
       <div class="h-top">
         <div class="h-stat" aria-live="polite">
           <div><b id="h-past">0</b><small>already past end of support</small></div>
@@ -445,7 +516,7 @@ footer a{color:#D8D1CE}
       <div class="lanes" id="lanes"></div>
       <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span>Today</span><span>+1 yr</span><span>+2 yrs</span><span>+3 yrs</span><span>+4 yrs</span></div></div>
     </div>
-    <p class="fine rv">Illustrative estate. Dates come from your own asset records and vendors’ published support schedules.</p>
+    <p class="fine rv">Dates in your own deployment come from your asset records and vendors’ published support schedules.</p>
   </div>
 </section>
 
@@ -536,6 +607,7 @@ footer a{color:#D8D1CE}
       <p style="margin-top:22px"><a class="textlink" href="https://about.pulsus.tech/demo/">See it in the Pulsus Platform demo →</a></p>
     </div>
     <div class="flow rv" aria-label="How Pulsus Tech feeds Pulsus Platform">
+      <p class="demo-tag light" style="margin:0">Demonstration scores</p>
       <div class="row"><div><b>Pulsus Tech</b><small>Availability · end of support · incidents · third parties</small></div></div>
       <span class="down" aria-hidden="true">↓</span>
       <div class="row"><div><b>Technology driver</b><small>One of the drivers of Operational Health</small></div><span class="sc" style="color:var(--amber)">71</span></div>
@@ -594,23 +666,22 @@ footer a{color:#D8D1CE}
   const feed = $("#feed"); let fi = 0;
   if (!reduce) setInterval(() => { fi = (fi + 1) % 3; feed.style.transform = `translateY(${-fi * 36}px)`; }, 3200);
 
-  // ── Dependency map ─────────────────────────────────────
+  // ── Scenarios on the dependency map ───────────────────
   // Tiers top to bottom: customer services, applications, infrastructure, providers, fourth parties.
   const N = [
     ["mob", "Mobile banking", 0], ["web", "Online banking", 0], ["br", "Branch tellers", 0], ["atm", "ATM network", 0], ["card", "Card payments", 0],
     ["core", "Core banking", 1], ["pay", "Payment gateway", 1], ["idp", "Identity service", 1], ["api", "API layer", 1],
-    ["dc", "Primary data centre", 2], ["cloud", "Cloud region", 2], ["net", "Branch network", 2],
-    ["vcore", "Core vendor", 3], ["vproc", "Card processor", 3], ["vcloud", "Cloud provider", 3], ["vtel", "Telecom carrier", 3],
+    ["dc", "Primary data centre", 2], ["cloud", "Cloud region", 2], ["net", "Branch network", 2], ["desk", "Teller & ATM devices", 2],
+    ["vcore", "Core vendor", 3], ["vproc", "Card processor", 3], ["vcloud", "Cloud provider", 3], ["vtel", "Telecom carrier", 3], ["vsec", "Security software", 3],
     ["vproc2", "Processor’s hosting", 4],
   ];
   // [from, to]: "from" depends on "to".
-  const E = [["mob","api"],["web","api"],["mob","idp"],["web","idp"],["api","core"],["api","pay"],["br","core"],["br","net"],["atm","core"],["atm","net"],["atm","vproc"],["card","pay"],["card","vproc"],
-    ["core","dc"],["core","vcore"],["pay","cloud"],["idp","cloud"],["api","cloud"],["cloud","vcloud"],["net","vtel"],["dc","vtel"],["vproc","vproc2"],["pay","vproc"]];
+  const E = [["mob","api"],["web","api"],["mob","idp"],["web","idp"],["api","core"],["api","pay"],["br","core"],["br","net"],["br","desk"],["atm","core"],["atm","net"],["atm","desk"],["atm","vproc"],["card","pay"],["card","vproc"],
+    ["core","dc"],["core","vcore"],["pay","cloud"],["idp","cloud"],["api","cloud"],["cloud","vcloud"],["net","vtel"],["dc","vtel"],["desk","vsec"],["vproc","vproc2"],["pay","vproc"]];
   const TIERS = ["Customer services", "Applications", "Infrastructure", "Providers", "Fourth parties"];
-  const W = 760, rowY = (t) => 46 + t * 98, bw = 128, bh = 34;
-  const byTier = TIERS.map((_, t) => N.filter((n) => n[2] === t));
+  const W = 760, rowY = (t) => 46 + t * 98, bw = 118, bh = 34;
   const pos = {};
-  byTier.forEach((ns, t) => ns.forEach((n, i) => { const gap = (W - 120) / ns.length; pos[n[0]] = [120 + gap * i + gap / 2, rowY(t)]; }));
+  TIERS.forEach((_, t) => { const ns = N.filter((n) => n[2] === t); ns.forEach((n, i) => { const gap = (W - 120) / ns.length; pos[n[0]] = [120 + gap * i + gap / 2, rowY(t)]; }); });
   const svg = $("#depmap");
   TIERS.forEach((t, i) => { const tx = el("text", { x: 8, y: rowY(i) + 4, class: "tier" }, 1); tx.textContent = t.split(" ")[0]; svg.append(tx); });
   const edges = E.map(([a, b]) => { const [x1, y1] = pos[a], [x2, y2] = pos[b]; const p = el("path", { class: "edge", d: `M${x1} ${y1 + bh / 2} C${x1} ${(y1 + y2) / 2} ${x2} ${(y1 + y2) / 2} ${x2} ${y2 - bh / 2}` }, 1); svg.append(p); return { a, b, p }; });
@@ -618,39 +689,81 @@ footer a{color:#D8D1CE}
   const tierOf = Object.fromEntries(N.map((n) => [n[0], n[2]]));
   const nodes = {};
   N.forEach(([id, label]) => {
-    const [x, y] = pos[id]; const g = el("g", { class: "node", tabindex: 0, role: "button", "aria-label": `${label}: show what depends on it`, transform: `translate(${x - bw / 2} ${y - bh / 2})` }, 1);
+    const [x, y] = pos[id]; const g = el("g", { class: "node", tabindex: 0, role: "button", "aria-label": `${label}: show what fails with it`, transform: `translate(${x - bw / 2} ${y - bh / 2})` }, 1);
     g.append(el("rect", { width: bw, height: bh, rx: 9 }, 1)); const t = el("text", { x: bw / 2, y: bh / 2 + 4.5, "text-anchor": "middle" }, 1); t.textContent = label; g.append(t);
-    g.addEventListener("click", () => pick(id)); g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(id); } });
+    g.addEventListener("click", () => show(null, id)); g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(null, id); } });
     svg.append(g); nodes[id] = g;
   });
-  // Everything that depends on id, directly or not.
   const upstream = (id) => { const out = new Set(), q = [id]; while (q.length) { const c = q.shift(); for (const e of E) if (e[1] === c && !out.has(e[0])) { out.add(e[0]); q.push(e[0]); } } return out; };
-  const hitEdges = (id, set) => edges.filter((e) => (set.has(e.a) || e.a === id) && (set.has(e.b) || e.b === id));
-  const SAMPLES = ["vproc2", "cloud", "core", "vtel"];
-  const chips = $("#chips");
-  const readout = $("#readout");
-  const drawChips = (cur) => { chips.innerHTML = ""; SAMPLES.forEach((s) => { const b = el("button", { type: "button", "aria-pressed": String(s === cur) }); b.textContent = name[s]; b.onclick = () => pick(s); chips.append(b); }); };
-  function pick(id) {
-    const up = upstream(id), customer = [...up].filter((x) => tierOf[x] === 0);
+  const light = (id) => {
+    const up = upstream(id);
     Object.entries(nodes).forEach(([k, g]) => { g.classList.toggle("src", k === id); g.classList.toggle("hit", up.has(k)); g.classList.toggle("dim", k !== id && !up.has(k)); });
-    const hot = new Set(hitEdges(id, up)); edges.forEach((e) => { e.p.classList.toggle("hot", hot.has(e)); e.p.classList.toggle("dim", !hot.has(e)); });
-    const alts = { cloud: 0, dc: 0, vcloud: 0, vtel: 0, core: 0, vcore: 0, pay: 0, vproc: 0, vproc2: 0, net: 0, idp: 0, api: 0 };
-    const spof = id in alts && customer.length >= 2;
-    readout.innerHTML = "";
-    const k = el("p", { class: "k" }); k.textContent = ["Customer service", "Application", "Infrastructure", "Provider", "Fourth party"][tierOf[id]] + " fails"; readout.append(k);
-    const h = el("h3"); h.textContent = name[id]; readout.append(h);
-    const big = el("div"); big.innerHTML = `<span class="big">${customer.length}</span> <span style="color:#CFC7C4">customer service${customer.length === 1 ? "" : "s"} go down with it</span>`; readout.append(big);
-    if (spof) { const f = el("p", { class: "flag" }); f.textContent = "⚠ Single point of failure: no alternative path for these services."; readout.append(f); }
-    if (tierOf[id] === 4) { const f = el("p", { class: "flag" }); f.textContent = "A fourth party: you have no contract with it, yet your card payments rest on it."; readout.append(f); }
-    const ul = el("ul"); [...up].sort((a, b) => tierOf[a] - tierOf[b]).forEach((x) => { const li = el("li"); li.innerHTML = `<span>${name[x]}</span><em>${TIERS[tierOf[x]].replace(/s$/, "")}</em>`; ul.append(li); }); if (up.size) readout.append(ul);
-    if (!up.size) { const p = el("p", { class: "hint" }); p.textContent = "Nothing else depends on it: a customer-facing service."; readout.append(p); }
-    const p = el("p", { class: "hint" }); p.textContent = "Try another:"; readout.append(p); readout.append(chips); drawChips(id);
-    // On a phone the map scrolls sideways: bring the chosen system into view.
+    edges.forEach((e) => { const hot = (up.has(e.a) || e.a === id) && (up.has(e.b) || e.b === id); e.p.classList.toggle("hot", hot); e.p.classList.toggle("dim", !hot); });
     const box = svg.parentElement; if (box.scrollWidth > box.clientWidth) box.scrollTo({ left: (pos[id][0] / W) * svg.clientWidth - box.clientWidth / 2, behavior: reduce ? "auto" : "smooth" });
+    return up;
+  };
+
+  // Each scenario: the problem, its consequences (demonstration), what management must do, and a real-world anchor (sourced).
+  const SC = [
+    { id: "update", t: "A faulty security update", node: "vsec",
+      what: "A routine update from the endpoint-security vendor crashes every teller PC and ATM on restart.",
+      cons: ["Branches and ATMs stop serving customers at opening time", "Recovery means touching every device by hand: about 2 days", "Customer complaints and a reportable incident to the supervisor within hours"],
+      acts: [["Invoke the branch continuity plan: manual cash procedures and customer messaging", "COO", "Within 1 hour"], ["Stage vendor updates through a test ring before they reach every device", "CIO", "Within 30 days"], ["Add the security vendor to the critical-provider register with recovery terms", "Third-party risk", "At the next review"]],
+      views: ["Dependency intelligence", "Outsourcing & third-party risk", "Resilience & data"],
+      real: ["On 19 July 2024 one faulty security-software update stopped about 8.5 million Windows devices. Parametrix estimated $5.4B in direct losses for US Fortune 500 companies alone.", "Parametrix, July 2024", "https://parametrixinsurance.com/in-the-news/crowdstrike-to-cost-fortune-500-5-4-billion-insured-loss-range-of-540-million-to-1-08-billion"] },
+    { id: "fourth", t: "A supplier’s supplier fails", node: "vproc2",
+      what: "The hosting company behind your card processor goes down. You have no contract with it, and no one told you it existed.",
+      cons: ["Card payments, ATMs and in-app payments stop together", "You learn about it from customers, not from the provider", "Recovery time depends on a company you have never assessed"],
+      acts: [["Switch ATMs to stand-in authorisation and tell customers which channels still work", "Head of Payments", "Within 1 hour"], ["Record the processor’s hosting provider as a fourth party in the register", "Third-party risk", "Within 30 days"], ["Require the processor’s recovery evidence and exit plan at renewal", "Procurement", "Before renewal"]],
+      views: ["Dependency intelligence", "Outsourcing & third-party risk"],
+      real: ["Third parties were involved in 48% of data breaches in 2026, up from 30% the year before.", "Verizon DBIR 2026", "https://www.verizon.com/business/resources/reports/dbir/"] },
+    { id: "eos", t: "Core system past end of support", node: "core",
+      what: "The database under core banking passed its vendor’s end of support five months ago. It still runs, without security patches.",
+      cons: ["Four of five customer services rest on a system that no longer receives fixes", "An open audit or supervisory finding until it is replaced", "A failure would take all four down at once"],
+      acts: [["Sign a dated risk acceptance with compensating controls", "CIO and CRO", "This month"], ["Fund and schedule the upgrade, with a tested rollback", "Executive committee", "This quarter"], ["Report progress to the board risk committee until closed", "CRO", "Monthly"]],
+      views: ["Technology lifecycle", "Application & service intelligence"],
+      real: ["For European banks, cyber and ICT risk is by far the most prominent driver of operational risk.", "EBA Risk Assessment Report, Dec 2025", "https://www.eba.europa.eu/publications-and-media/publications/risk-assessment-report-december-2025"] },
+    { id: "cloud", t: "A cloud region outage", node: "cloud",
+      what: "The cloud region hosting the payment gateway, identity service and API layer becomes unavailable for four hours.",
+      cons: ["Mobile banking, online banking and card payments fail together", "Four hours against a two-hour recovery target", "Concentration that no single contract made visible"],
+      acts: [["Fail over to the secondary region, if it has been tested", "Head of Infrastructure", "Within the recovery target"], ["Test regional failover twice a year and keep the evidence", "CIO", "Next 6 months"], ["Report cloud concentration to the board with an exit strategy", "CRO", "Next board cycle"]],
+      views: ["Dependency intelligence", "Resilience & data", "Network & incident intelligence"],
+      real: ["57% of organisations said their last major outage cost more than $100,000; one in five, more than $1 million.", "Uptime Institute, 2026", "https://intelligence.uptimeinstitute.com/resource/annual-outage-analysis-2026"] },
+    { id: "carrier", t: "A recurring network fault", node: "vtel",
+      what: "The telecom carrier’s link to the data centre and the branches drops for minutes at a time, three times this quarter.",
+      cons: ["Short outages across branches, ATMs and digital channels that each look minor", "The pattern only shows when incidents are read together", "Service credits that never cover the cost to customers"],
+      acts: [["Open a problem record and require the carrier’s root cause", "Head of Infrastructure", "This week"], ["Add a second carrier on a diverse route for the data centre", "CIO", "This quarter"], ["Hold the carrier to its service levels at the next review", "Procurement", "At review"]],
+      views: ["Network & incident intelligence", "Dependency intelligence"],
+      real: ["Unplanned downtime now costs the world’s 2,000 largest companies $600B a year.", "Splunk & Oxford Economics, 2026", "https://www.oxfordeconomics.com/resource/the-hidden-costs-of-downtime-2026/"] },
+  ];
+  const tabsSc = $("#sc-tabs"), readout = $("#readout");
+  SC.forEach((s, i) => { const b = el("button", { type: "button", role: "tab", "aria-selected": "false", id: `sc-${s.id}`, class: "sc-tab" }); b.innerHTML = `<small>${String(i + 1).padStart(2, "0")}</small>${s.t}`; b.onclick = () => show(s.id); tabsSc.append(b); });
+  const esc = (x) => x.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  function show(sid, nodeId) {
+    const s = SC.find((x) => x.id === sid);
+    const id = s ? s.node : nodeId;
+    [...tabsSc.children].forEach((b) => b.setAttribute("aria-selected", String(b.id === `sc-${sid}`)));
+    const up = light(id), customer = [...up].filter((x) => tierOf[x] === 0);
+    if (!s) {
+      readout.innerHTML = `<p class="k">${["Customer service", "Application", "Infrastructure", "Provider", "Fourth party"][tierOf[id]]} fails</p><h3>${esc(name[id])}</h3>
+        <div><span class="big">${customer.length}</span> <span style="color:#CFC7C4">customer service${customer.length === 1 ? "" : "s"} go down with it</span></div>
+        ${up.size ? `<ul>${[...up].sort((a, b) => tierOf[a] - tierOf[b]).map((x) => `<li><span>${esc(name[x])}</span><em>${TIERS[tierOf[x]].replace(/s$/, "")}</em></li>`).join("")}</ul>` : `<p class="hint">Nothing else depends on it: a customer-facing service.</p>`}
+        <p class="hint">Choose a scenario above to see what management needs to do.</p>`;
+      return;
+    }
+    readout.innerHTML = `
+      <div class="step"><p class="k"><span class="sn">1</span>The problem</p><h3>${esc(s.t)}</h3><p class="what">${esc(s.what)}</p></div>
+      <div class="step"><p class="k"><span class="sn">2</span>Operational consequences</p>
+        <p class="impact"><span class="big">${customer.length}</span><span>of 5 customer services fail:<br><b>${customer.map((x) => esc(name[x])).join(", ")}</b></span></p>
+        <ul class="cons">${s.cons.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      <div class="step"><p class="k"><span class="sn">3</span>What management needs to do</p>
+        <ol class="acts">${s.acts.map(([a, o, w]) => `<li><span>${esc(a)}</span><em>${esc(o)} · ${esc(w)}</em></li>`).join("")}</ol></div>
+      <p class="seen">Seen in Pulsus Tech: ${s.views.map((v) => `<span>${esc(v)}</span>`).join("")}</p>
+      <p class="real"><b>In the real world.</b> ${esc(s.real[0])} <a href="${s.real[2]}" target="_blank" rel="noopener">${esc(s.real[1])} ↗</a></p>`;
   }
-  drawChips(null);
-  // Open on the most telling case once the map comes into view.
-  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { pick("vproc2"); o.disconnect(); } }, { threshold: .4 }).observe(svg);
+  // Open on the first scenario once the section comes into view (so the motion is seen).
+  show(SC[0].id);
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { show(SC[0].id); o.disconnect(); } }, { threshold: .3 }).observe(svg);
 
   // ── Lifecycle horizon ──────────────────────────────────
   // months from today to end of support; crit: supports a critical service.
@@ -714,7 +827,7 @@ footer a{color:#D8D1CE}
       m: `<table><thead><tr><th>Concentration</th><th>Services resting on it</th><th>Alternative</th></tr></thead><tbody>
         <tr><td>Cloud region</td><td>${bar(80, "r")}<span class="num"> 4 of 5</span></td><td><span class="lp lp-r">None</span></td></tr>
         <tr><td>Card processor</td><td>${bar(40, "a")}<span class="num"> 2 of 5</span></td><td><span class="lp lp-a">Manual</span></td></tr>
-        <tr><td>Telecom carrier</td><td>${bar(60, "a")}<span class="num"> 3 of 5</span></td><td><span class="lp lp-g">Second line</span></td></tr></tbody></table><p style="margin:14px;color:var(--muted)">Pull a thread in the map above to see it live.</p>` },
+        <tr><td>Telecom carrier</td><td>${bar(60, "a")}<span class="num"> 3 of 5</span></td><td><span class="lp lp-g">Second line</span></td></tr></tbody></table><p style="margin:14px;color:var(--muted)">Try the scenarios above to see it live.</p>` },
     { id: "res", t: "Resilience & data", s: "Continuity · recovery · evidence", i: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4",
       p: "Track continuity, recovery, data protection and supporting evidence for critical technology and third-party arrangements.", o: "Recovery you can evidence to auditors and regulators.",
       m: `<table><thead><tr><th>Critical service</th><th>Recovery target</th><th>Last test</th><th>Result</th></tr></thead><tbody>
@@ -728,7 +841,7 @@ footer a{color:#D8D1CE}
     b.innerHTML = `<span class="i">${ico(v.i)}</span><span><b>${v.t}</b><small>${v.s}</small></span>`;
     tabs.append(b);
     const p = el("div", { role: "tabpanel", id: `vp-${v.id}`, "aria-labelledby": `vt-${v.id}`, class: "vpanel", tabindex: "0" }); if (i) p.hidden = true;
-    p.innerHTML = `<p class="eyebrow mute">${String(i + 1).padStart(2, "0")} / 06</p><h3 style="margin-top:12px">${v.t}</h3><p>${v.p}</p><div class="mock">${v.m}</div><p class="out">${v.o}</p>`;
+    p.innerHTML = `<p class="eyebrow mute">${String(i + 1).padStart(2, "0")} / 06</p><h3 style="margin-top:12px">${v.t}</h3><p>${v.p}</p><p class="demo-tag light">Demonstration data</p><div class="mock">${v.m}</div><p class="out">${v.o}</p>`;
     panels.append(p);
   });
   const sel = (i, focus) => { [...tabs.children].forEach((b, j) => { b.setAttribute("aria-selected", String(i === j)); b.tabIndex = i === j ? 0 : -1; panels.children[j].hidden = i !== j; }); if (focus) tabs.children[i].focus(); };
