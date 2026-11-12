@@ -359,6 +359,33 @@ footer a{color:#D8D1CE}
 .real{margin:0;background:#1F1A16;border:1px solid #4A3A22;border-radius:12px;padding:12px 14px;font-size:14px;color:#E9DCC7}
 .real b{color:#F5B25F}
 .real a{color:#F5B25F;white-space:nowrap}
+
+/* demo note + pricing */
+.hero-demo{margin:16px 0 0;font-size:14px;color:var(--dmuted)}
+.hero-demo a{color:#fff}
+.price{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px}
+.plan,.calc{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3vw,34px);box-shadow:0 30px 60px -40px rgba(20,16,15,.25)}
+.plan .k,.calc .k{font:700 12px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:0}
+.amt{display:flex;align-items:baseline;gap:10px;margin:16px 0 8px}
+.amt b{font:800 clamp(52px,6vw,72px)/1 var(--display);letter-spacing:-.03em}
+.amt span{color:var(--muted)}
+.sub{margin:0;color:var(--ink2)}
+.incl{list-style:none;margin:22px 0;padding:22px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;font-size:15.5px}
+.incl li{display:flex;gap:10px}
+.incl li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12l4 4 8-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.p-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.calc{background:var(--ink);color:#fff;border-color:var(--ink);display:grid;gap:12px;align-content:start}
+.calc .k{color:#FF8099;margin-bottom:8px}
+.c-row2{display:flex;justify-content:space-between;font-size:15px;color:#DCD5D3}
+.c-row2 output{font:700 17px/1 var(--display);color:#fff}
+.calc input[type=range]{accent-color:var(--red2)}
+.c-total{margin-top:14px;padding-top:18px;border-top:1px solid #2E2A31;display:grid;gap:6px}
+.c-total span{font-size:14px;color:var(--dmuted)}
+.c-total b{font:800 clamp(44px,5vw,60px)/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.c-total small{color:#CFC7C4;font-size:14px}
+.c-ent{margin:6px 0 0;padding:12px 14px;border-radius:12px;background:#2A1A1F;border:1px solid #5A2733;font-size:14px;color:#F3D6DC}
+.c-ent a{color:#fff}
+@media (max-width:900px){.price{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -373,9 +400,10 @@ footer a{color:#D8D1CE}
       <a href="#lifecycle">Lifecycle</a>
       <a href="#views">Six views</a>
       <a href="#regulation">Regulation</a>
+      <a href="#pricing">Pricing</a>
     </nav>
     <a class="suite" href="https://about.pulsus.tech/">← Pulsus Intelligence Suite</a>
-    <a class="btn btn-red" href="https://about.pulsus.tech/demo/?app=Tech#ask">Book a demo</a>
+    <a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo</a>
   </div>
 </header>
 
@@ -393,9 +421,10 @@ footer a{color:#D8D1CE}
       <h1 id="hero-h" style="margin-top:20px"><span class="l">Know what’s running.</span><span class="l">Understand what’s at risk.</span><span class="l">Act before it’s a problem.</span></h1>
       <p class="lead">One live view of the applications, networks, vendors and ageing systems your institution runs on, and of the risk building up inside them.</p>
       <div class="hero-cta">
-        <a class="btn btn-red" href="https://about.pulsus.tech/demo/?app=Tech#ask">See where your tech risks are hiding <span class="arr" aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#scenarios">Try a scenario</a>
+        <a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="https://executive.pulsus.tech/signup?product=tech&amp;return=https%3A%2F%2Fabouttech.pulsus.tech%2F">Start a 14-day free trial</a>
       </div>
+      <p class="hero-demo">The demo is the real product with built-in demonstration data. No sign-up. <a href="#scenarios">Or try a scenario first ↓</a></p>
       <p class="hero-note"><span><i aria-hidden="true"></i><b>Live intelligence</b></span><span><b>Actionable signals</b></span><span><b>Executive clarity</b></span><span><b>Stronger resilience</b></span></p>
     </div>
 
@@ -617,13 +646,51 @@ footer a{color:#D8D1CE}
   </div>
 </section>
 
+<!-- ── Pricing ── -->
+<section id="pricing" aria-labelledby="price-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Pricing</p>
+      <h2 id="price-h">Simple pricing. <em>Start on your own.</em></h2>
+      <p class="lead">Sign up, invite your team and connect your estate yourself. No sales call needed, and the first 14 days are free.</p>
+    </div>
+    <div class="price rv">
+      <div class="plan">
+        <p class="k">Pulsus Tech</p>
+        <p class="amt"><b id="p-base">$500</b><span>per month</span></p>
+        <p class="sub">Includes <b id="p-inc">5</b> users. Each further user <b id="p-extra">$50</b> a month. People who only view are free.</p>
+        <ul class="incl">
+          <li>All six views: applications, network &amp; incidents, lifecycle, third parties, dependencies, resilience</li>
+          <li>Readings feed Pulsus Platform’s Operational Health</li>
+          <li>Sign-in with your Pulsus account; roles for owners, admins and editors</li>
+        </ul>
+        <div class="p-cta">
+          <a class="btn btn-red" href="https://executive.pulsus.tech/signup?product=tech&amp;return=https%3A%2F%2Fabouttech.pulsus.tech%2F">Start your free trial <span class="arr" aria-hidden="true">→</span></a>
+          <a class="textlink" href="https://demo-ict.pulsus.tech/">Try the live demo first</a>
+        </div>
+        <p class="fine" style="margin-top:14px">Free for <span id="p-trial">14</span> days, no card needed. Then billed monthly in US dollars; you manage users and billing yourself in Pulsus Platform.</p>
+      </div>
+      <div class="calc" aria-labelledby="calc-h">
+        <p class="k" id="calc-h">What would it cost you?</p>
+        <label class="c-row2" for="c-users"><span>People who edit or administer</span><output id="c-users-out" for="c-users">12</output></label>
+        <input id="c-users" type="range" min="1" max="60" value="12" />
+        <label class="c-row2" for="c-view"><span>People who only view</span><output id="c-view-out" for="c-view">30</output></label>
+        <input id="c-view" type="range" min="0" max="500" step="10" value="30" />
+        <div class="c-total" aria-live="polite"><span>Your monthly price</span><b id="c-total">$850</b><small id="c-break">$500 for 5 users + 7 more at $50. 30 viewers free.</small></div>
+        <p class="c-ent" id="c-ent" hidden>More than <span id="p-limit">50</span> editors? Self-service covers up to that; above it we set you up on an enterprise agreement. <a href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20enterprise">Talk to us</a>.</p>
+      </div>
+    </div>
+    <p class="fine rv">Prices are read live from the Pulsus price list. Taxes may apply depending on where you are.</p>
+  </div>
+</section>
+
 <!-- ── CTA ── -->
 <section class="cta" aria-labelledby="cta-h">
   <div class="wrap">
-    <p class="eyebrow">Book a demo</p>
+    <p class="eyebrow">See it working</p>
     <h2 id="cta-h">See where your tech risks are hiding.</h2>
-    <p>A working walkthrough, not a slide deck. Or email <a href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20request%20a%20conversation">info@pulsus.tech</a> to start with a conversation.</p>
-    <a class="btn btn-red" href="https://about.pulsus.tech/demo/?app=Tech#ask">Book a demo <span class="arr" aria-hidden="true">→</span></a>
+    <p>Open the live demo now, or start your own 14-day trial. Prefer a conversation? Email <a href="mailto:info@pulsus.tech?subject=Pulsus%20Tech%20%E2%80%94%20request%20a%20conversation">info@pulsus.tech</a> or <a href="https://about.pulsus.tech/demo/?app=Tech#ask">book a walkthrough</a>.</p>
+    <div class="hero-cta" style="justify-content:center"><a class="btn btn-red" href="https://demo-ict.pulsus.tech/">Try the live demo <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-ghost" href="https://executive.pulsus.tech/signup?product=tech&amp;return=https%3A%2F%2Fabouttech.pulsus.tech%2F">Start a free trial</a></div>
   </div>
 </section>
 </main>
@@ -789,6 +856,25 @@ footer a{color:#D8D1CE}
   };
   range.addEventListener("input", setH); setH();
 
+
+  // ── Pricing: read live from the Pulsus price list, with today's prices as the fallback ──
+  const P = { base: 500, inc: 5, extra: 50, trial: 14, limit: 50 };
+  const usd = (n) => "$" + n.toLocaleString("en-US");
+  const cu = $("#c-users"), cv = $("#c-view");
+  const calc = () => {
+    const u = +cu.value, v = +cv.value, more = Math.max(0, u - P.inc), total = P.base + more * P.extra;
+    $("#c-users-out").textContent = u; $("#c-view-out").textContent = v === 500 ? "500+" : v;
+    $("#c-total").textContent = usd(total);
+    $("#c-break").textContent = `${usd(P.base)} for ${P.inc} users${more ? ` + ${more} more at ${usd(P.extra)}` : ""}. ${v ? `${v === 500 ? "500+" : v} viewer${v === 1 ? "" : "s"} free.` : ""}`;
+    $("#c-ent").hidden = u <= P.limit;
+  };
+  const paint = () => { $("#p-base").textContent = usd(P.base); $("#p-inc").textContent = P.inc; $("#p-extra").textContent = usd(P.extra); $("#p-trial").textContent = P.trial; $("#p-limit").textContent = P.limit; calc(); };
+  cu.addEventListener("input", calc); cv.addEventListener("input", calc); paint();
+  fetch("https://executive.pulsus.tech/api/pricing").then((r) => r.ok ? r.json() : null).then((d) => {
+    const t = d && d.currency === "USD" && (d.products || []).find((x) => x.key === "tech");
+    if (!t || !(t.monthly > 0)) return;
+    Object.assign(P, { base: t.monthly, inc: t.includedUsers ?? P.inc, extra: t.extraUserPrice ?? P.extra, trial: d.trialDays ?? P.trial, limit: d.selfServiceUserLimit ?? P.limit }); paint();
+  }).catch(() => {});
   // ── Six views ──────────────────────────────────────────
   const ico = (d) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const bar = (v, c = "") => `<div class="bar"><i class="${c}" style="width:${v}%"></i></div>`;
